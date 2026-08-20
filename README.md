@@ -103,21 +103,21 @@ All image processing is performed **real-time *in-memory*** through secure Next.
 
 ```mermaid
 flowchart TD
-    A[User Selects Photo] --> B[Interactive Canvas Cropper]
-    B --> C[Next.js Client Component]
-    C -->|FormData POST| D[Next.js Route Handlers /api/*]
+    A["User Selects Photo"] --> B["Interactive Canvas Cropper"]
+    B --> C["Next.js Client Component"]
+    C -->|"FormData POST"| D["Next.js Route Handlers (/api/*)"]
     
-    subgraph Server_Boundary [Server-Side Next.js (Secure)]
-        D --> E[File Validation & Size < 2MB]
-        E --> F[Inject API Key & Secret]
-        F -->|Fetch HTTPS| G[Face++ Cloud API US v3]
-        G -->|Response JSON| H[Friendly Error Mapping & Sanitizer]
+    subgraph Server_Boundary ["Server-Side Next.js (Secure)"]
+        D --> E["File Validation & Size < 2MB"]
+        E --> F["Inject API Key & Secret"]
+        F -->|"Fetch HTTPS"| G["Face++ Cloud API US v3"]
+        G -->|"Response JSON"| H["Friendly Error Mapping & Sanitizer"]
     end
     
-    H -->|JSON Result| C
-    C --> I[Interactive FacePreview & Metric Visualization]
-    C -.->|Save Token| J[SessionStorage & Clipboard]
-    J -.->|Auto-fill| K[Analyze Tool /analyze]
+    H -->|"JSON Result"| C
+    C --> I["Interactive FacePreview & Metric Visualization"]
+    C -.->|"Save Token"| J["SessionStorage & Clipboard"]
+    J -.->|"Auto-fill"| K["Analyze Tool (/analyze)"]
 ```
 
 ---
