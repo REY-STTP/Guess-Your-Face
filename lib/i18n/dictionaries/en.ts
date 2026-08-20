@@ -1,0 +1,167 @@
+import type { Dictionary } from "../types";
+
+export const enDictionary: Dictionary = {
+  common: {
+    loading: "Loading...",
+    analyzing: "Analyzing...",
+    comparing: "Comparing...",
+    changeImage: "Change image",
+    copyFaceToken: "Copy face token",
+    copiedFaceToken: "Face token copied",
+    manualCopyToast: "Token can be copied manually via the button on the card.",
+    cropTitle: "Crop to 1:1",
+    cropZoom: "Zoom",
+    cropCancel: "Cancel",
+    cropApply: "Apply",
+    cropLoading: "Loading image...",
+    dropzoneLabel: "Drag & drop facial photo here",
+    dropzoneHint: "or click to browse - JPG / PNG, cropped to 1:1",
+    close: "Close",
+    backToHome: "Back to Home",
+    yearsOld: "years",
+  },
+  nav: {
+    detect: "Detect",
+    compare: "Compare",
+    analyze: "Analyze",
+    detectHint: "Face detection + attributes",
+    compareHint: "Compare two faces (1:1)",
+    analyzeHint: "Analyze face tokens",
+  },
+  home: {
+    heroTitlePart1: "Read",
+    heroTitleAccent: "your face",
+    heroTitlePart2: "with real-time AI.",
+    heroDesc:
+      "Three AI-powered facial tools backed by Face++. Upload an image, inspect deep facial attributes, verify two portraits, and batch analyze face tokens in real time.",
+    builtWith: "Built on Face++ (Detect, Compare, Face Analyze API).",
+  },
+  tools: {
+    detect: {
+      title: "Detect",
+      badge: "Multi-Face & Attributes",
+      desc: "Upload a photo to simultaneously detect all faces and read emotional spectra, age estimation, gender, and beauty scores.",
+      action: "Start Face Detection",
+      pageDesc:
+        "Upload a photo to detect all faces and read emotions, age, gender, smile intensity, and key facial attributes with interactive bounding boxes.",
+    },
+    compare: {
+      title: "Compare",
+      badge: "1:1 Verification",
+      desc: "Accurately compare two facial photos with confidence score visualization and official Face++ thresholds.",
+      action: "Compare 2 Photos",
+      pageDesc:
+        "Upload two portrait photos to determine whether they belong to the same person (1:1 matching) with confidence score and threshold verdicts.",
+    },
+    analyze: {
+      title: "Analyze",
+      badge: "Deep Batch",
+      desc: "Deeply inspect detailed facial attributes from a batch of registered face tokens without re-uploading.",
+      action: "Inspect Face Tokens",
+      pageDesc:
+        "Enter face tokens (from Detect results) to analyze deep attributes without re-uploading images. Up to 5 tokens per request.",
+    },
+  },
+  detect: {
+    actionLabel: "Detect Faces",
+    faceDetected: "faces detected",
+    indexInfo: "Numbered labels on image correspond with result cards below.",
+    faceTitle: "Face",
+    detectAnother: "Detect another image",
+    goToAnalyze: "Analyze face tokens",
+    metrics: {
+      gender: "Gender",
+      age: "Age",
+      smiling: "Smiling",
+      beauty: "Beauty",
+      faceQuality: "Face quality",
+      headpose: "Head pose",
+    },
+    toasts: {
+      tokensCopied: "Face tokens copied to clipboard.",
+      unknownError: "An unknown error occurred.",
+      connectionError: "Failed to connect to server. Please try again.",
+    },
+  },
+  compare: {
+    photo1Label: "Photo 1",
+    photo2Label: "Photo 2",
+    actionLabel: "Compare Faces",
+    compareAgain: "Compare again",
+    confidenceTitle: "Matching Confidence",
+    confidenceExplanation:
+      "The higher the confidence score, the higher the likelihood that both faces are the same individual.",
+    same: "Same",
+    different: "Different",
+    footnote:
+      "Verdict follows Face++ false-positive thresholds: 1e-3 is lenient, 1e-5 is strict.",
+    changePhoto1: "Change photo 1",
+    changePhoto2: "Change photo 2",
+    toasts: {
+      unknownError: "An unknown error occurred.",
+      connectionError: "Failed to connect to server. Please try again.",
+    },
+  },
+  analyze: {
+    textareaLabel: "Face tokens",
+    textareaPlaceholder:
+      "Separate with commas or newlines.\ne.g.: 5a23f8b1..., 9d2c1f00...",
+    textareaHint: "Obtain from Detect results. Maximum 5 tokens per request.",
+    filterLabel: "Attributes to analyze",
+    actionLabel: "Analyze Faces",
+    analyzeAgain: "Analyze again",
+    maxTokensError: "Maximum 5 face tokens allowed per request.",
+    faceTitle: "Face",
+    attributes: {
+      gender: "Gender",
+      age: "Age",
+      emotion: "Emotion",
+      smiling: "Smiling",
+      facequality: "Face quality",
+      beauty: "Beauty",
+      mouthstatus: "Mouth status",
+      eyestatus: "Eye status",
+      leftEye: "Left eye",
+      rightEye: "Right eye",
+    },
+    mouth: {
+      noMask: "no mask",
+      surgicalMask: "surgical mask",
+      medicalMask: "medical mask",
+      mouthOpen: "mouth open",
+      mouthOccluded: "mouth occluded",
+    },
+    eye: {
+      open: "open",
+      closed: "closed",
+      normalGlassesOpen: "open (glasses)",
+      normalGlassesClosed: "closed (glasses)",
+      darkGlasses: "sunglasses",
+      occlusion: "occluded",
+    },
+    toasts: {
+      unknownError: "An unknown error occurred.",
+      connectionError: "Failed to connect to server. Please try again.",
+    },
+  },
+  emotions: {
+    anger: "Anger",
+    disgust: "Disgust",
+    fear: "Fear",
+    happiness: "Happiness",
+    neutral: "Neutral",
+    sadness: "Sadness",
+    surprise: "Surprise",
+    genderMale: "Male",
+    genderFemale: "Female",
+  },
+  notFound: {
+    title: "404 · Page Not Found",
+    desc: "The face or page you are looking for is unavailable. You can return to the homepage or start detecting faces.",
+    startDetect: "Start Detecting",
+  },
+  footer: {
+    disclaimer:
+      "Guess Your Face - powered by Face++. Images are processed in-memory and never stored.",
+  },
+};

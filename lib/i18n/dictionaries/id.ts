@@ -1,0 +1,167 @@
+import type { Dictionary } from "../types";
+
+export const idDictionary: Dictionary = {
+  common: {
+    loading: "Memuat...",
+    analyzing: "Menganalisis...",
+    comparing: "Membandingkan...",
+    changeImage: "Ganti gambar",
+    copyFaceToken: "Salin face token",
+    copiedFaceToken: "Face token tersalin",
+    manualCopyToast: "Token dapat disalin manual lewat tombol di kartu.",
+    cropTitle: "Pangkas ke 1:1",
+    cropZoom: "Zoom",
+    cropCancel: "Batal",
+    cropApply: "Terapkan",
+    cropLoading: "Memuat gambar...",
+    dropzoneLabel: "Seret & lepas foto wajah di sini",
+    dropzoneHint: "atau klik untuk memilih - JPG / PNG, dipangkas ke 1:1",
+    close: "Tutup",
+    backToHome: "Kembali ke Beranda",
+    yearsOld: "tahun",
+  },
+  nav: {
+    detect: "Detect",
+    compare: "Compare",
+    analyze: "Analyze",
+    detectHint: "Deteksi wajah + atribut",
+    compareHint: "Bandingkan dua wajah (1:1)",
+    analyzeHint: "Analisis face token",
+  },
+  home: {
+    heroTitlePart1: "Tebak",
+    heroTitleAccent: "wajahmu",
+    heroTitlePart2: "biar AI yang membaca.",
+    heroDesc:
+      "Tiga alat deteksi wajah bertenaga Face++. Unggah gambar, dapatkan atribut wajah, bandingkan dua foto, dan analisis face token. Semua diproses real-time dan tidak disimpan.",
+    builtWith: "Dibangun di atas Face++ (Detect, Compare, Face Analyze API).",
+  },
+  tools: {
+    detect: {
+      title: "Detect",
+      badge: "Multi-Face & Atribut",
+      desc: "Unggah foto, deteksi semua wajah secara serentak, serta analisis spektrum emosi, estimasi usia, gender, dan beauty score.",
+      action: "Mulai Deteksi Wajah",
+      pageDesc:
+        "Unggah foto, lalu aplikasi mendeteksi semua wajah dan membaca emosi, usia, jenis kelamin, senyum, dan atribut lainnya. Wajah yang terdeteksi otomatis diberi penanda di gambar.",
+    },
+    compare: {
+      title: "Compare",
+      badge: "1:1 Verification",
+      desc: "Bandingkan dua foto wajah secara akurat dengan skor confidence dan toleransi threshold Face++.",
+      action: "Bandingkan 2 Foto",
+      pageDesc:
+        "Unggah dua foto wajah dan bandingkan apakah keduanya orang yang sama (1:1). Dapatkan skor confidence beserta ambang batas kesamaan.",
+    },
+    analyze: {
+      title: "Analyze",
+      badge: "Deep Batch",
+      desc: "Inspeksi atribut mendalam dari sekumpulan face token yang sudah dideteksi sebelumnya.",
+      action: "Inspeksi Face Token",
+      pageDesc:
+        "Masukkan face token (dari hasil Detect) untuk menganalisis atribut wajah tanpa mengunggah ulang gambar. Maksimal 5 token per permintaan.",
+    },
+  },
+  detect: {
+    actionLabel: "Deteksi Wajah",
+    faceDetected: "wajah terdeteksi",
+    indexInfo: "Urutan nomor di gambar sama dengan kartu hasil di bawah.",
+    faceTitle: "Wajah",
+    detectAnother: "Deteksi gambar lain",
+    goToAnalyze: "Analisis face token",
+    metrics: {
+      gender: "Jenis kelamin",
+      age: "Usia",
+      smiling: "Senyum",
+      beauty: "Beauty",
+      faceQuality: "Kualitas wajah",
+      headpose: "Head pose",
+    },
+    toasts: {
+      tokensCopied: "Face token tersalin ke clipboard.",
+      unknownError: "Terjadi kesalahan yang tidak diketahui.",
+      connectionError: "Gagal terhubung ke server. Coba lagi.",
+    },
+  },
+  compare: {
+    photo1Label: "Foto 1",
+    photo2Label: "Foto 2",
+    actionLabel: "Bandingkan Wajah",
+    compareAgain: "Bandingkan lagi",
+    confidenceTitle: "Skor Kecocokan (Confidence)",
+    confidenceExplanation:
+      "Semakin tinggi, semakin besar kemungkinan dua wajah ini orang yang sama.",
+    same: "Sama",
+    different: "Beda",
+    footnote:
+      "Verdict mengikuti ambang batas false-positive Face++: 1e-3 paling longgar, 1e-5 paling ketat.",
+    changePhoto1: "Ganti foto 1",
+    changePhoto2: "Ganti foto 2",
+    toasts: {
+      unknownError: "Terjadi kesalahan yang tidak diketahui.",
+      connectionError: "Gagal terhubung ke server. Coba lagi.",
+    },
+  },
+  analyze: {
+    textareaLabel: "Face token",
+    textareaPlaceholder:
+      "Pisahkan dengan koma atau baris baru.\ncth: 5a23f8b1..., 9d2c1f00...",
+    textareaHint: "Ambil dari hasil Detect. Maksimal 5 token per permintaan.",
+    filterLabel: "Atribut yang dianalisis",
+    actionLabel: "Analisis Wajah",
+    analyzeAgain: "Analisis lagi",
+    maxTokensError: "Maksimal 5 face token per permintaan.",
+    faceTitle: "Wajah",
+    attributes: {
+      gender: "Jenis kelamin",
+      age: "Usia",
+      emotion: "Emosi",
+      smiling: "Senyum",
+      facequality: "Kualitas wajah",
+      beauty: "Beauty",
+      mouthstatus: "Status mulut",
+      eyestatus: "Status mata",
+      leftEye: "Mata kiri",
+      rightEye: "Mata kanan",
+    },
+    mouth: {
+      noMask: "tanpa masker",
+      surgicalMask: "masker bedah",
+      medicalMask: "masker medis",
+      mouthOpen: "mulut terbuka",
+      mouthOccluded: "mulut tertutup objek",
+    },
+    eye: {
+      open: "terbuka",
+      closed: "tertutup",
+      normalGlassesOpen: "terbuka (kacamata)",
+      normalGlassesClosed: "tertutup (kacamata)",
+      darkGlasses: "kacamata hitam",
+      occlusion: "terhalang",
+    },
+    toasts: {
+      unknownError: "Terjadi kesalahan yang tidak diketahui.",
+      connectionError: "Gagal terhubung ke server. Coba lagi.",
+    },
+  },
+  emotions: {
+    anger: "Marah",
+    disgust: "Jijik",
+    fear: "Takut",
+    happiness: "Bahagia",
+    neutral: "Netral",
+    sadness: "Sedih",
+    surprise: "Terkejut",
+    genderMale: "Pria",
+    genderFemale: "Wanita",
+  },
+  notFound: {
+    title: "404 · Halaman Tidak Ditemukan",
+    desc: "Wajah atau halaman yang kamu cari tidak tersedia. Kamu dapat kembali ke beranda atau langsung mulai deteksi wajah.",
+    startDetect: "Mulai Deteksi",
+  },
+  footer: {
+    disclaimer:
+      "Guess Your Face - ditenagai Face++. Gambar diproses real-time dan tidak disimpan.",
+  },
+};
