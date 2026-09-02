@@ -1,22 +1,49 @@
-"use client";
+import type { Metadata } from "next";
+import { AnalyzeClient } from "./page.client";
+import { ToolStructuredData } from "@/components/ToolStructuredData";
+import { ToolTldr } from "@/components/ToolTldr";
 
-import { AnalyzeTool } from "@/components/AnalyzeTool";
-import { useLanguage } from "@/lib/i18n/context";
+export const metadata: Metadata = {
+  title: "Analyze Face Tokens — Deep Attribute Inspector (Up to 5 Tokens)",
+  description:
+    "Inspect up to 5 face tokens for deep attributes: gender, age, emotion, smiling, face quality, beauty, mouth status (mask detection), and eye status (glasses / occlusion). Reuse face tokens from Detect without re-uploading.",
+  keywords: [
+    "face token",
+    "face token analysis",
+    "mask detection",
+    "eye status",
+    "glasses detection",
+    "deep attribute inspector",
+    "Face++ analyze",
+  ],
+  alternates: {
+    canonical: "/analyze",
+    languages: {
+      id: "/analyze",
+      en: "/en/analyze",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Analyze — Guess Your Face",
+    description:
+      "Deep inspection for up to 5 face tokens: mask, glasses, emotion, beauty and more.",
+    url: "/analyze",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Analyze — Guess Your Face",
+    description:
+      "Deep inspection for up to 5 face tokens: mask, glasses, emotion, beauty and more.",
+  },
+};
 
 export default function AnalyzePage() {
-  const { t } = useLanguage();
-
   return (
-    <div className="animate-rise">
-      <div className="mb-8">
-        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-          {t.tools.analyze.title}
-        </h1>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
-          {t.tools.analyze.pageDesc}
-        </p>
-      </div>
-      <AnalyzeTool />
-    </div>
+    <>
+      <ToolStructuredData slug="analyze" />
+      <ToolTldr slug="analyze" />
+      <AnalyzeClient />
+    </>
   );
 }

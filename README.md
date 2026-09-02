@@ -15,7 +15,7 @@
 
 *"Guess your face, let AI do the reading."*
 
-[Key Features](#-key-features) • [Evolution & Upgrades](#-evolution--upgrades-from-previous-version) • [Architecture](#-architecture--workflow) • [Installation](#-installation--local-setup) • [API Routes](#-internal-api-endpoints)
+[Key Features](#-key-features) • [Evolution & Upgrades](#-evolution--upgrades-from-previous-version) • [Architecture](#-architecture--workflow) • [Installation](#-installation--local-setup) • [API Routes](#-internal-api-endpoints) • [SEO / GEO / AEO / LLMO](#-seo--geo--aeo--llmo-setup)
 
 </div>
 
@@ -240,3 +240,73 @@ This application provides internal Next.js Route Handlers that isolate API crede
 Created with ❤️ by **[REY-STTP](https://github.com/REY-STTP)**.
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 🔍 SEO / GEO / AEO / LLMO Setup
+
+This project ships with first-class discoverability built in: technical SEO, structured data, Open Graph cards, AI-crawler friendly routing, and an `llms.txt` description file.
+
+### Canonical Domain
+
+The production domain is **`https://www.guess-your-face.web.id`**. A [`proxy.ts`](./proxy.ts) at the repo root (Next.js 16's replacement for `middleware.ts`, runs on the Node.js runtime) forces a **308 Permanent Redirect** to the canonical host from any other origin (preview URLs, the legacy Vercel domain `guess-your-expression.vercel.app`, or the apex without `www`). The proxy is a no-op in development so `localhost:3000` keeps working.
+
+### Files That Power Discoverability
+
+| Concern | File | Purpose |
+| :--- | :--- | :--- |
+| Crawler policy | [`app/robots.ts`](./app/robots.ts) | Generates `/robots.txt` allowing all major crawlers plus 12 AI bots (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `cohere-ai`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`). |
+| Sitemap | [`app/sitemap.ts`](./app/sitemap.ts) | Emits 8 URLs (4 routes × `id`/`en` locales) with `<xhtml:link rel="alternate" hreflang>` annotations. |
+| PWA manifest | [`app/manifest.ts`](./app/manifest.ts) | Generates `/manifest.webmanifest` for mobile install + brand SERP. |
+| Root structured data | [`components/StructuredData.tsx`](./components/StructuredData.tsx) | Renders `Organization` + `WebSite` JSON-LD (brand entity, sitelinks searchbox, logo). |
+| Per-tool structured data | [`components/ToolStructuredData.tsx`](./components/ToolStructuredData.tsx) | Renders `WebApplication` + `BreadcrumbList` JSON-LD on `/detect`, `/compare`, `/analyze`. |
+| FAQ JSON-LD | [`components/FaqStructuredData.tsx`](./components/FaqStructuredData.tsx) | Renders `FAQPage` JSON-LD on the landing page. |
+| Open Graph root | [`app/opengraph-image.tsx`](./app/opengraph-image.tsx) | Branded 1200×630 OG image for `/`. |
+| Open Graph per-tool | `app/(tools)/{detect,compare,analyze}/opengraph-image.tsx` | Per-tool branded 1200×630 OG images. |
+| Twitter card | [`app/twitter-image.tsx`](./app/twitter-image.tsx) | `summary_large_image` Twitter card. |
+| About + FAQ content | [`components/MarketingSections.tsx`](./components/MarketingSections.tsx) | Server-rendered About, stat block, comparison table, and 10 Q&A. |
+| Per-tool TL;DR | [`components/ToolTldr.tsx`](./components/ToolTldr.tsx) | 40–60 word answer-first summary + 4-step ordered list per tool. |
+| LLMs description | [`public/llms.txt`](./public/llms.txt) + [`public/llms-full.txt`](./public/llms-full.txt) | Structured site summary for `GPTBot`, `PerplexityBot`, `ClaudeBot`, etc. |
+| Canonical redirect | [`proxy.ts`](./proxy.ts) | 308 redirect to `www.guess-your-face.web.id` in production. |
+
+### Environment Variables
+
+Add to `.env.local` (already committed for this project, **do not commit your own**):
+
+```env
+FACEPP_API_KEY=your_faceplusplus_api_key
+FACEPP_API_SECRET=your_faceplusplus_api_secret
+NEXT_PUBLIC_SITE_URL=https://www.guess-your-face.web.id
+```
+
+`NEXT_PUBLIC_SITE_URL` is the source of truth for every absolute URL the app emits — sitemap entries, Open Graph images, canonical links, JSON-LD `url` fields, and `llms.txt` references. Override it per environment if you preview under a different host.
+
+### Post-Deploy Steps
+
+1. **Google Search Console**
+   - Property → URL prefix → `https://www.guess-your-face.web.id`
+   - Verification: HTML tag (the token is already wired into `app/layout.tsx`)
+   - Sitemaps → submit `https://www.guess-your-face.web.id/sitemap.xml`
+   - URL Inspection → request indexing for `/`, `/detect`, `/compare`, `/analyze`
+
+2. **Bing Webmaster Tools**
+   - Add site → **`Import from Google Search Console`** (one-click auto-verification)
+   - Sitemaps → submit `https://www.guess-your-face.web.id/sitemap.xml`
+   - (Optional) Enable **IndexNow** for instant URL submission
+
+3. **Rich Results Validation**
+   - https://search.google.com/test/rich-results → check `/`, `/detect`, `/compare`, `/analyze`
+   - https://validator.schema.org/ → independent JSON-LD check
+
+4. **Open Graph Preview**
+   - https://www.opengraph.xyz/ → check share preview for every URL
+   - https://cards-dev.twitter.com/validator → confirm Twitter cards
+
+### Why This Matters
+
+| Layer | What it does |
+| :--- | :--- |
+| **SEO** | Brand name appears in SERP (not the Vercel default domain), per-tool titles are unique, sitemap + hreflang consolidate bilingual URLs. |
+| **GEO** | Generative engines (Google AI Overviews, Perplexity, ChatGPT Search) can quote the FAQ, the About section, and the `llms.txt` definitions verbatim because they are server-rendered HTML. |
+| **AEO** | `FAQPage` schema + 40–60 word answers + comparison table make every URL eligible for featured snippets and voice answers. |
+| **LLMO** | `llms.txt` + `llms-full.txt` give LLM crawlers a structured summary without needing to render the entire JavaScript bundle. |

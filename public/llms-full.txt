@@ -1,0 +1,149 @@
+# Guess Your Face — Full Documentation
+
+> Real-time AI facial detection, 1:1 comparison, and face token analysis.
+> Powered by Face++. Privacy-first, zero data retention.
+
+## About Guess Your Face
+
+Guess Your Face (GYF) is a modern web application built by REY-STTP that uses
+the Face++ Cognitive Services API to analyze human faces in photographs. It
+provides three real-time tools — Detect, Compare, and Analyze — wrapped in a
+privacy-first architecture that processes every image in memory and never
+writes user photos to disk, server, or database.
+
+The product is the evolution (v2.0) of the original
+[Facial-Expression-Detection-App](https://github.com/REY-STTP/Facial-Expression-Detection-App),
+rewritten from scratch on Next.js 16 App Router with React 19 and TypeScript.
+
+## Key features
+
+### Detect (`/detect`)
+- Multi-face detection in a single photo.
+- 7 emotion spectra (Anger, Disgust, Fear, Happiness, Neutral, Sadness, Surprise)
+  rendered as percentage-weighted animated bars.
+- Comprehensive metrics: gender, age, smiling score, beauty score (male,
+  female, average), 3D headpose (pitch, roll, yaw), and face quality score.
+- Interactive bounding boxes drawn on the detected faces, indexed to result
+  cards below.
+- Auto-token handoff: detected face_tokens are saved to sessionStorage and
+  clipboard so the user can instantly open the Analyze tool for deeper
+  inspection without re-uploading.
+
+### Compare (`/compare`)
+- 1:1 face verification: upload two photos, decide whether they show the same
+  person.
+- Independent croppers for Photo 1 and Photo 2 with drag/pan/zoom.
+- Confidence score visualization.
+- Official Face++ false-positive thresholds (1e-3, 1e-4, 1e-5) shown as
+  visual markers.
+- Verdict: Same / Different based on the confidence vs threshold comparison.
+
+### Analyze (`/analyze`)
+- Deep attribute inspector for up to 5 face tokens in a single request.
+- Modular attribute filters — pick exactly which dimensions to fetch:
+  - Gender & Age
+  - Emotion & Smiling
+  - Face Quality & Beauty
+  - Mouth Status: surgical mask, medical mask, mouth open, mouth occluded
+  - Eye Status: open, closed, normal glasses, sunglasses, occlusion
+- No re-upload required — paste face tokens from Detect results.
+
+### Bilingual localization
+- Full Indonesian (ID, default) and English (EN) support.
+- Instant client-side language switch via React Context.
+- Persistent preference stored in `localStorage` under key `gyf-locale`.
+- Automatic browser-language detection on first visit.
+
+### Built-in canvas cropper
+- Interactive pan / drag / zoom before upload.
+- Forces 1:1 aspect ratio to match Face++ face-detection best practices.
+- Operates entirely client-side; the cropped blob is sent as multipart to
+  the Next.js Route Handler.
+
+## Tech stack
+
+- Core framework: Next.js 16 (App Router) and React 19.
+- Language: TypeScript 5.
+- Styling: Tailwind CSS v4 with native CSS variables for theming.
+- Typography: `@fontsource-variable/inter` (body), `@fontsource-variable/space-grotesk`
+  (display), `@fontsource-variable/jetbrains-mono` (code/data).
+- Icons: `@phosphor-icons/react`.
+- Toasts: `sonner`.
+- AI engine: Face++ Cognitive Services API (US region, v3).
+
+## Architecture
+
+```
+[User selects photo]
+  → [Interactive Canvas Cropper] (client-side)
+  → [Next.js Client Tool component]
+  → [POST multipart/form-data to /api/*]
+  → [Next.js Route Handler: file validation + 2 MB cap]
+  → [Inject FACEPP_API_KEY & FACEPP_API_SECRET server-side]
+  → [HTTPS fetch to api-us.faceplusplus.com/facepp/v3/*]
+  → [Friendly error mapping & sanitization]
+  → [JSON result returned to client]
+  → [Interactive FacePreview + EmotionBars + Metric cards]
+  → [Optional: save face_token to sessionStorage/clipboard]
+  → [Optional: open Analyze tool with tokens pre-filled]
+```
+
+The Face++ API key and secret are only ever read inside Route Handlers
+(`app/api/*/route.ts`), never shipped to the client bundle.
+
+## API routes
+
+| Endpoint | Method | Body | Purpose |
+| :-- | :-- | :-- | :-- |
+| `/api/detect` | POST | `multipart/form-data` (`file`) | Forward to Face++ `/detect`; return detected faces + attributes. |
+| `/api/compare` | POST | `multipart/form-data` (`file1`, `file2`) | Forward to Face++ `/compare`; return confidence + thresholds. |
+| `/api/analyze` | POST | `application/json` (`{ faceTokens, attributes }`) | Forward to Face++ `/face/analyze`; return deep attributes per token. |
+
+All routes validate MIME type (`image/jpeg`, `image/png`), enforce the
+2 MB Face++ limit, and translate Face++ error codes into localized Indonesian
+or English messages via the `FRIENDLY_ERRORS` table in `lib/facepp.ts`.
+
+## Privacy and security
+
+1. **Zero Data Retention** — Uploaded images are processed directly in memory
+   (Node `Buffer` / `FormData` stream) and forwarded to the Face++ API.
+   They are never written to local disk, server filesystem, or any database.
+2. **Protected credentials** — `FACEPP_API_KEY` and `FACEPP_API_SECRET` are
+   exclusively read in server-side Route Handlers and never appear in the
+   client bundle.
+3. **Strict file validation** — MIME type check (`image/jpeg`, `image/png`)
+   and a hard 2 MB size cap before forwarding to Face++.
+4. **No analytics on user photos** — Guess Your Face does not run any
+   analytics on uploaded images. The only telemetry is standard Vercel
+   request metrics.
+
+## How it works
+
+1. **Upload & crop** — User drops or selects a photo. An interactive canvas
+   cropper lets them frame the face in 1:1 with drag/pan/zoom.
+2. **Client validation** — Before submitting, the browser checks the file
+   type and size locally to give instant feedback.
+3. **Server relay** — The client POSTs the file to a Next.js Route Handler
+   (`/api/detect`, `/api/compare`, or `/api/analyze`).
+4. **API credential injection** — Inside the Route Handler, the server
+   reads `FACEPP_API_KEY` and `FACEPP_API_SECRET` from environment variables
+   and appends them as multipart fields.
+5. **Forward to Face++** — The Route Handler streams the request to
+   `https://api-us.faceplusplus.com/facepp/v3/{endpoint}`.
+6. **Sanitize & respond** — Errors are mapped to friendly messages via
+   `lib/facepp.ts`. Successful JSON is returned to the client.
+7. **Render** — The client component renders the response: bounding boxes
+   on faces, percentage bars for emotions, metric cards for attributes,
+   etc.
+
+## Open source
+
+- Repository: https://github.com/REY-STTP/Guess-Your-Face
+- Author: REY-STTP (https://github.com/REY-STTP)
+- License: MIT
+
+## Author
+
+Created by REY-STTP.
+
+Distributed under the MIT License.

@@ -1,0 +1,62 @@
+# Guess Your Face
+
+> Real-time AI facial detection, 1:1 comparison, and face token analysis.
+> Powered by Face++. Privacy-first, zero data retention.
+
+Guess Your Face (GYF) is a free, open-source web application that uses Face++
+Cognitive Services to analyze photos in real time. All uploaded images are
+processed in-memory and never stored. No login, no signup, no analytics on
+user photos.
+
+## Tools
+
+- [Detect](https://www.guess-your-face.web.id/detect): Multi-face detection with 7 emotions (Anger, Disgust, Fear, Happiness, Neutral, Sadness, Surprise), age estimation, gender, smile, beauty score, 3D headpose, and face quality.
+- [Compare](https://www.guess-your-face.web.id/compare): 1:1 face matching with confidence score and Face++ false-positive thresholds (1e-3, 1e-4, 1e-5).
+- [Analyze](https://www.guess-your-face.web.id/analyze): Deep attribute inspection for up to 5 face tokens (mouth status / mask, eye status / glasses, beauty, age, emotion).
+
+## Key facts
+
+- Powered by Face++ Cognitive Services (US region, API v3)
+- Tech stack: Next.js 16, React 19, TypeScript, Tailwind CSS v4
+- Languages: Indonesian (default), English
+- Zero data retention: images processed in-memory and never stored
+- Max image size: 2 MB
+- Supported formats: JPG, PNG
+- Open source: https://github.com/REY-STTP/Guess-Your-Face
+
+## FAQ
+
+### Is Guess Your Face free?
+Yes, Guess Your Face is free to use. There is no signup, no subscription, and no analytics on user photos. All tools run in your browser against our serverless API.
+
+### Are my photos stored?
+No. All uploaded images are processed in-memory and immediately discarded after the Face++ API responds. Nothing is written to disk, server, or database. The privacy-first architecture is verified in the open-source code.
+
+### What is a face token?
+A face_token is a unique identifier returned by Face++ for each detected face. You can copy it from Detect results and paste it into the Analyze tool to inspect deep attributes (mask, glasses, eye status, beauty) without re-uploading the original image. Face tokens are session-only and expire automatically.
+
+### What is the difference between Detect, Compare, and Analyze?
+Detect finds faces in a photo and reads 7 emotions, age, gender, smile, beauty, headpose, and face quality. Compare verifies whether two portrait photos show the same person (1:1 matching) with a confidence score. Analyze inspects previously detected faces (via face_token) for deeper attributes like mask wearing, eye status, and glasses — up to 5 tokens per request.
+
+### How accurate is the emotion detection?
+Emotion scores are produced by Face++ deep learning models trained on large datasets. Confidence varies by image quality, lighting, and face angle, but typical accuracy for the 7 emotion classes (Anger, Disgust, Fear, Happiness, Neutral, Sadness, Surprise) is high for clear frontal faces.
+
+### Do I need to create an account?
+No. Guess Your Face has no login, no signup, and no user accounts. Upload, analyze, and leave.
+
+### Which languages are supported?
+Indonesian (default) and English. Switch via the language toggle in the header. The choice is stored in your browser's localStorage.
+
+### Which image formats and sizes are supported?
+JPG and PNG only, with a maximum file size of 2 MB. Photos are cropped to 1:1 aspect ratio via an interactive canvas cropper before being sent to Face++.
+
+### Why does the API sometimes fail?
+Common reasons: image too large (>2 MB), wrong format, no face detected in the photo, Face++ quota exhausted, or rate limit hit. The UI displays a localized error message in each case.
+
+### Is Guess Your Face open source?
+Yes. The full source code is available at https://github.com/REY-STTP/Guess-Your-Face under the MIT License. You can audit the privacy claims, file issues, or fork it.
+
+## Optional
+
+For a longer Markdown version of this documentation, see
+[llms-full.txt](https://www.guess-your-face.web.id/llms-full.txt).
