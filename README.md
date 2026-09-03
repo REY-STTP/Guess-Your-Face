@@ -207,8 +207,6 @@ guess-your-face/
 │   ├── llms.txt                       # Short-form site summary for LLM crawlers
 │   ├── logo.png                       # 1254×1254 high-res brand logo (Organization JSON-LD)
 │   └── og-image.png                   # 1200×630 static OG/Twitter card for homepage
-├── scripts/
-│   └── generate-favicon-assets.mjs    # Regenerates favicon/apple/icon-192/icon-512 from public/icon.png
 ├── .env.example                       # Environment variables template
 ├── next.config.ts                     # Next.js config (allowedDevOrigins)
 ├── package.json                       # Dependencies & npm scripts
@@ -251,14 +249,7 @@ FACEPP_API_SECRET=your_faceplusplus_api_secret_here
 NEXT_PUBLIC_SITE_URL=https://your-site-domain
 ```
 
-### Step 4: (Optional) Regenerate Favicon Assets
-Only needed if you change the canonical logo at `public/icon.png`:
-```bash
-npm run icons:build
-```
-This regenerates `favicon.ico` (16/32/48 multi-image), `apple-icon.png` (180×180), `icon-192.png` (192×192), and `icon-512.png` (512×512) using `sharp`.
-
-### Step 5: Run Development Server
+### Step 4: Run Development Server
 ```bash
 npm run dev
 ```
@@ -279,7 +270,6 @@ npm run start
 | `npm run build` | Production build |
 | `npm run start` | Start the production server |
 | `npm run lint` | Run ESLint with `eslint-config-next` |
-| `npm run icons:build` | Regenerate all favicon/Apple/PWA icons from `public/icon.png` |
 
 ---
 
