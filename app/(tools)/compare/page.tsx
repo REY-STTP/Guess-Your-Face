@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    siteName: "Guess Your Face",
     title: "Compare — Guess Your Face",
     description:
       "1:1 face matching with confidence score and Face++ thresholds.",

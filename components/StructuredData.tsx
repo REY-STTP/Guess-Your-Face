@@ -8,7 +8,7 @@
  */
 const SITE_URL: string =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.guess-your-face.web.id";
-const LOGO_URL = `${SITE_URL}/icon.png`;
+const LOGO_URL = `${SITE_URL}/logo.png`;
 
 export function StructuredData() {
   const organization = {
@@ -21,15 +21,15 @@ export function StructuredData() {
     logo: {
       "@type": "ImageObject",
       url: LOGO_URL,
-      width: 512,
-      height: 512,
+      width: 1254,
+      height: 1254,
       caption: "Guess Your Face",
     },
     image: {
       "@type": "ImageObject",
       url: LOGO_URL,
-      width: 512,
-      height: 512,
+      width: 1254,
+      height: 1254,
     },
     description:
       "Guess Your Face is a free, real-time AI facial analysis web app powered by Face++. Multi-face detection, 1:1 comparison, and face-token analysis with zero data retention.",

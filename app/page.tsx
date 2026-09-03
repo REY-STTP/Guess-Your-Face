@@ -16,10 +16,19 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    siteName: "Guess Your Face",
     title: "Guess Your Face — Read your face with real-time AI",
     description:
       "Free real-time AI face detection, comparison, and token analysis. Privacy-first.",
     url: "/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Guess Your Face — Read your face with real-time AI",
+      },
+    ],
   },
 };
 

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    siteName: "Guess Your Face",
     title: "Analyze — Guess Your Face",
     description:
       "Deep inspection for up to 5 face tokens: mask, glasses, emotion, beauty and more.",

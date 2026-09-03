@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    siteName: "Guess Your Face",
     title: "Detect — Guess Your Face",
     description:
       "Upload a photo, detect all faces, and read 7 emotions plus 10+ attributes in real time.",

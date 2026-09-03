@@ -13,6 +13,9 @@ import { StructuredData } from "@/components/StructuredData";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.guess-your-face.web.id";
 
+// Bing Webmaster Tools verification token for the site.
+const BING_SITE_VERIFICATION = "251DD7C241139056B7F36D7E05ABA7E2";
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafafa" },
@@ -69,7 +72,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Guess Your Face — Read your face with real-time AI",
@@ -83,7 +86,7 @@ export const metadata: Metadata = {
       "Real-time AI facial detection, 1:1 comparison, and token analysis.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Guess Your Face — Read your face with real-time AI",
@@ -117,9 +120,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   verification: {
     // Google Search Console verification token.
-    // Bing is auto-verified via "Import from Google Search Console" — no
-    // separate meta tag is needed unless you lose GSC access.
     google: "Y7vUvy3ieL5E3-uUMiCEqb3M_yvHBxMQrytRpNfMOpU",
+    other: {
+      "msvalidate.01": BING_SITE_VERIFICATION,
+    },
   },
   formatDetection: {
     email: false,
