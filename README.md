@@ -159,16 +159,14 @@ guess-your-face/
 │   │   ├── compare/route.ts           # POST multipart → Face++ /compare
 │   │   └── detect/route.ts            # POST multipart → Face++ /detect
 │   ├── globals.css                    # Global styles, color tokens, & animations
-│   ├── layout.tsx                     # Root layout, Toaster & LanguageProvider
+│   ├── layout.tsx                     # Root layout, Toaster & LanguageProvider, Google + Bing verification
 │   ├── manifest.ts                    # /manifest.webmanifest (PWA + brand SERP)
 │   ├── not-found.tsx                  # Custom 404 (server entry)
 │   ├── not-found.client.tsx           # 404 client component (Localized)
-│   ├── opengraph-image.tsx            # Root OG image (1200×630)
-│   ├── page.tsx                       # Landing page (server entry)
+│   ├── page.tsx                       # Landing page (server entry) — openGraph.siteName + images for /og-image.png
 │   ├── page.client.tsx                # Landing page client wrapper
 │   ├── robots.ts                      # /robots.txt with AI bot whitelist
-│   ├── sitemap.ts                     # Multilingual sitemap (id/en × 4 routes)
-│   └── twitter-image.tsx              # Root Twitter card (1200×630)
+│   └── sitemap.ts                     # Multilingual sitemap (id/en × 4 routes)
 ├── components/
 │   ├── AnalyzeTool.tsx                # Analyze feature controller (client)
 │   ├── CompareTool.tsx                # Compare feature controller (client)
@@ -204,10 +202,11 @@ guess-your-face/
 │   ├── favicon.ico                    # 16/32/48 multi-image ICO
 │   ├── icon-192.png                   # 192×192 Android home screen
 │   ├── icon-512.png                   # 512×512 PWA large icon
-│   ├── icon.png                       # 512×512 canonical logo (referenced by JSON-LD)
+│   ├── icon.png                       # 512×512 source favicon
 │   ├── llms-full.txt                  # Long-form Markdown for LLM crawlers
 │   ├── llms.txt                       # Short-form site summary for LLM crawlers
-│   └── logo.png                       # 1254×1254 high-res brand image
+│   ├── logo.png                       # 1254×1254 high-res brand logo (Organization JSON-LD)
+│   └── og-image.png                   # 1200×630 static OG/Twitter card for homepage
 ├── scripts/
 │   └── generate-favicon-assets.mjs    # Regenerates favicon/apple/icon-192/icon-512 from public/icon.png
 ├── .env.example                       # Environment variables template
@@ -334,9 +333,8 @@ The proxy **pass-throughs client-side navigation** (requests carrying the `Next-
 | Root structured data | [`components/StructuredData.tsx`](./components/StructuredData.tsx) | Renders `Organization` (with `logo` + `image` + `caption` for Knowledge Panel eligibility) + `WebSite` JSON-LD (brand entity, sitelinks searchbox). |
 | Per-tool structured data | [`components/ToolStructuredData.tsx`](./components/ToolStructuredData.tsx) | Renders `WebApplication` + `BreadcrumbList` JSON-LD on `/detect`, `/compare`, `/analyze`. |
 | FAQ JSON-LD | [`components/FaqStructuredData.tsx`](./components/FaqStructuredData.tsx) | Renders `FAQPage` JSON-LD on the landing page (English for global SEO crawlers; the visible FAQ is localized via `MarketingSections`). |
-| Open Graph root | [`app/opengraph-image.tsx`](./app/opengraph-image.tsx) | Branded 1200×630 OG image for `/`. Explicitly referenced via `metadata.openGraph.images` + `metadata.twitter.images`. |
-| Open Graph per-tool | `app/(tools)/{detect,compare,analyze}/opengraph-image.tsx` | Per-tool branded 1200×630 OG images. |
-| Twitter card | [`app/twitter-image.tsx`](./app/twitter-image.tsx) | `summary_large_image` Twitter card for the root URL. |
+| Open Graph root | `public/og-image.png` | Static 1200×630 OG image served by Next.js file convention; referenced via `metadata.openGraph.images` + `metadata.twitter.images` for predictable URL and CDN caching. |
+| Open Graph per-tool | `app/(tools)/{detect,compare,analyze}/opengraph-image.tsx` | Per-tool branded 1200×630 OG images (dynamic, with hash-suffix routing). |
 | About + FAQ content | [`components/MarketingSections.tsx`](./components/MarketingSections.tsx) | Client component (so it can swap language at runtime): About, 4-stat block, tool comparison cards, and 10 Q&A in the active locale. |
 | Per-tool TL;DR | [`components/ToolTldr.tsx`](./components/ToolTldr.tsx) | Client component: 40–60 word answer-first summary + 4-step ordered list per tool, all localized. |
 | LLMs description | [`public/llms.txt`](./public/llms.txt) + [`public/llms-full.txt`](./public/llms-full.txt) | Structured site summary for `GPTBot`, `PerplexityBot`, `ClaudeBot`, etc. |
@@ -363,7 +361,8 @@ NEXT_PUBLIC_SITE_URL=https://www.guess-your-face.web.id
    - URL Inspection → request indexing for `/`, `/detect`, `/compare`, `/analyze`
 
 2. **Bing Webmaster Tools**
-   - Add site → **`Import from Google Search Console`** (one-click auto-verification)
+   - Add site → `https://www.guess-your-face.web.id`
+   - Verification: HTML tag (the `msvalidate.01` token is wired into `app/layout.tsx` via `verification.other`)
    - Sitemaps → submit `https://www.guess-your-face.web.id/sitemap.xml`
    - (Optional) Enable **IndexNow** for instant URL submission
 
