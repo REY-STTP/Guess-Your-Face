@@ -19,6 +19,8 @@ export type Dictionary = {
     close: string;
     backToHome: string;
     yearsOld: string;
+    facePreviewAlt: string;
+    languageSelectorLabel: string;
   };
   nav: {
     detect: string;
@@ -58,6 +60,68 @@ export type Dictionary = {
       pageDesc: string;
     };
   };
+  tldr: {
+    label: string;
+    howItWorks: string;
+    items: {
+      detect: {
+        tldr: string;
+        steps: string[];
+      };
+      compare: {
+        tldr: string;
+        steps: string[];
+      };
+      analyze: {
+        tldr: string;
+        steps: string[];
+      };
+    };
+  };
+  marketing: {
+    aboutKicker: string;
+    aboutHeading: string;
+    aboutP1: string;
+    aboutP2: string;
+    aboutP3: string;
+    stats: {
+      emotionClasses: string;
+      attributes: string;
+      maxTokens: string;
+      imageSize: string;
+    };
+    pickKicker: string;
+    pickHeading: string;
+    card: {
+      featured: string;
+      tool: string;
+      inLabel: string;
+      open: string;
+    };
+    compareCards: {
+      detect: {
+        when: string;
+        input: string;
+        output: string[];
+      };
+      compare: {
+        when: string;
+        input: string;
+        output: string[];
+      };
+      analyze: {
+        when: string;
+        input: string;
+        output: string[];
+      };
+    };
+    faqKicker: string;
+    faqHeading: string;
+  };
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
   detect: {
     actionLabel: string;
     faceDetected: string;

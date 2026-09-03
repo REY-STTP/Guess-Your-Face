@@ -1,62 +1,65 @@
+"use client";
+
 /**
- * Server-rendered TL;DR + "how it works" block for each tool page.
- * Sits between the client tool component and the main interactive area.
- * Pure HTML, crawlable, quote-friendly.
+ * Server-initial-rendered, client-hydrated TL;DR + "how it works" block
+ * for each tool page. Sits between the client tool component and the
+ * main interactive area. Pure HTML, crawlable, quote-friendly.
+ *
+ * The component is a client component so it can read the active locale
+ * from the LanguageContext, but it renders no interactive UI — meaning
+ * SSR can still produce static HTML for the default locale on first paint.
  */
-type TldrConfig = {
-  tldr: string;
-  steps: string[];
-};
+import { useLanguage } from "@/lib/i18n/context";
 
-const CONFIG: Record<"detect" | "compare" | "analyze", TldrConfig> = {
-  detect: {
-    tldr:
-      "Upload a photo to detect every face at once and read seven emotions (Anger, Disgust, Fear, Happiness, Neutral, Sadness, Surprise), age, gender, smile intensity, beauty score, 3D headpose, and face quality. Results render in real time with interactive bounding boxes drawn on each detected face.",
-    steps: [
-      "Drop a JPG or PNG photo (max 2 MB) into the dropzone.",
-      "Crop to 1:1 with the interactive canvas if needed.",
-      "Read the per-face metric cards: emotion bars, age, gender, smile, beauty, headpose, face quality.",
-      "Copy each face_token to inspect deeper attributes in Analyze.",
-    ],
-  },
-  compare: {
-    tldr:
-      "Upload two portrait photos and decide whether they show the same person (1:1 face matching). Guess Your Face returns a confidence score and applies Face++ false-positive thresholds (1e-3, 1e-4, 1e-5) so you can pick how strict the verdict should be.",
-    steps: [
-      "Drop the first photo (Photo 1) into the left dropzone.",
-      "Drop the second photo (Photo 2) into the right dropzone.",
-      "Crop each independently to 1:1 if needed.",
-      "Read the confidence score and the threshold verdict (Same / Different).",
-    ],
-  },
-  analyze: {
-    tldr:
-      "Paste up to 5 face_tokens from a previous Detect run to inspect deep attributes without re-uploading the photo: gender, age, emotion, smiling, face quality, beauty, mouth status (surgical / medical mask), and eye status (glasses / sunglasses / occlusion).",
-    steps: [
-      "Copy one or more face_tokens from the Detect result cards.",
-      "Paste them into the textarea (comma- or newline-separated).",
-      "Pick which attributes to analyze (modular filters).",
-      "Read the deep attribute breakdown per token.",
-    ],
-  },
-};
+type Slug = "detect" | "compare" | "analyze";
 
-export function ToolTldr({ slug }: { slug: "detect" | "compare" | "analyze" }) {
-  const cfg = CONFIG[slug];
+export function ToolTldr({ slug }: { slug: Slug }) {
+  const { t } = useLanguage();
+  const cfg = t.tldr.items[slug];
 
   return (
     <section
       aria-label={`${slug} summary`}
-      className="mx-auto mb-10 max-w-3xl rounded-2xl border border-line bg-surface2/60 p-5 text-sm leading-relaxed text-muted"
+      className="relative mb-10 overflow-hidden rounded-2xl border border-line bg-surface p-5 sm:p-6"
     >
-      <p className="text-base text-foreground">
-        <strong className="font-semibold">TL;DR.</strong> {cfg.tldr}
+      {/* Subtle accent rail — keeps the block grounded without shouting */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 left-0 w-[3px] bg-accent/80"
+      />
+
+      <header className="mb-3 flex items-center gap-2">
+        <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-accent">
+          {t.tldr.label}
+        </span>
+        <span aria-hidden="true" className="h-px flex-1 bg-line" />
+      </header>
+
+      <p className="text-balance text-[15px] leading-relaxed text-foreground sm:text-base">
+        {cfg.tldr}
       </p>
-      <ol className="mt-4 list-decimal space-y-1 pl-5">
-        {cfg.steps.map((step) => (
-          <li key={step}>{step}</li>
-        ))}
-      </ol>
+
+      <div className="mt-5 border-t border-line pt-4">
+        <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-faint">
+          {t.tldr.howItWorks}
+        </h2>
+        <ol className="mt-3 space-y-2">
+          {cfg.steps.map((step, i) => (
+            <li
+              key={step}
+              className="flex gap-3 text-sm leading-relaxed text-muted"
+            >
+              <span
+                aria-hidden="true"
+                className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-accent-soft font-mono text-[10px] font-semibold tabular-nums text-accent"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-pretty">{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

@@ -2,6 +2,7 @@
 
 import type { ImageDims } from "@/lib/use-image-upload";
 import type { FaceRectangle } from "@/lib/facepp";
+import { useLanguage } from "@/lib/i18n/context";
 
 export type FaceBox = {
   index: number;
@@ -19,6 +20,7 @@ export function FacePreview({
   boxes?: FaceBox[];
   maxWidth?: string;
 }) {
+  const { t } = useLanguage();
   return (
     <div
       className={`relative w-full ${maxWidth} mx-auto overflow-hidden rounded-2xl border border-line bg-surface2`}
@@ -26,7 +28,7 @@ export function FacePreview({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
-        alt="Pratinjau wajah"
+        alt={t.common.facePreviewAlt}
         className="block h-auto w-full"
       />
       {boxes.map((box) => (

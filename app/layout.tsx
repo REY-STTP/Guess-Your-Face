@@ -67,12 +67,28 @@ export const metadata: Metadata = {
     url: "/",
     locale: "id_ID",
     alternateLocale: ["en_US"],
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Guess Your Face — Read your face with real-time AI",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Guess Your Face — Read your face with real-time AI",
     description:
       "Real-time AI facial detection, 1:1 comparison, and token analysis.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Guess Your Face — Read your face with real-time AI",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -86,8 +102,17 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    apple: [{ url: "/icon.png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any", rel: "icon", type: "image/x-icon" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },
   manifest: "/manifest.webmanifest",
   verification: {

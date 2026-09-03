@@ -14,14 +14,26 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["productivity", "utilities", "photo"],
     icons: [
       {
-        src: "/icon.png",
-        sizes: "any",
+        src: "/favicon.ico",
+        sizes: "16x16 32x32 48x48",
+        type: "image/x-icon",
+        purpose: "any",
+      },
+      {
+        src: "/icon-192.png",
+        sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon.png",
-        sizes: "any",
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
       },

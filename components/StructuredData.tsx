@@ -2,9 +2,13 @@
  * Server-rendered JSON-LD structured data for the root layout.
  * Renders Organization + WebSite schema; per-tool schemas are
  * emitted from each tool page itself (see the (tools) group page files).
+ *
+ * Logo URL must be an absolute URL with declared width/height for
+ * Google Knowledge Panel eligibility.
  */
 const SITE_URL: string =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.guess-your-face.web.id";
+const LOGO_URL = `${SITE_URL}/icon.png`;
 
 export function StructuredData() {
   const organization = {
@@ -16,7 +20,14 @@ export function StructuredData() {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/icon.png`,
+      url: LOGO_URL,
+      width: 512,
+      height: 512,
+      caption: "Guess Your Face",
+    },
+    image: {
+      "@type": "ImageObject",
+      url: LOGO_URL,
       width: 512,
       height: 512,
     },

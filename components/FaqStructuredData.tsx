@@ -1,6 +1,9 @@
 /**
  * Server component that emits FAQPage JSON-LD schema.
- * Rendered on the landing page below the tool grid.
+ *
+ * The schema is intentionally English-only to maximise global SEO reach
+ * (Google, Bing, AI answer engines). The on-page FAQ in `MarketingSections`
+ * is rendered in the user's active locale from the i18n dictionary.
  */
 
 type FaqItem = {
@@ -82,5 +85,3 @@ export function FaqStructuredData() {
     />
   );
 }
-
-export { FAQS };
