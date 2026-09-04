@@ -34,6 +34,22 @@ export function StructuredData() {
     description:
       "Guess Your Face is a free, real-time AI facial analysis web app powered by Face++. Multi-face detection, 1:1 comparison, and face-token analysis with zero data retention.",
     foundingDate: "2025",
+    foundingLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "ID",
+      },
+    },
+    knowsAbout: [
+      "Face++ API",
+      "Face Detection",
+      "Facial Expression Recognition",
+      "Face Verification",
+      "Computer Vision",
+      "Privacy Engineering",
+      "Zero Data Retention",
+    ],
     sameAs: [
       "https://github.com/REY-STTP/Guess-Your-Face",
       "https://github.com/REY-STTP",
@@ -42,6 +58,7 @@ export function StructuredData() {
       "@type": "ContactPoint",
       contactType: "technical support",
       url: "https://github.com/REY-STTP/Guess-Your-Face/issues",
+      availableLanguage: ["Indonesian", "English"],
     },
   };
 

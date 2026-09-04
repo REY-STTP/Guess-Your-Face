@@ -5,36 +5,31 @@ const SITE_URL =
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-const LOCALES = ["id", "en"] as const;
+// Single-URL site — client-side i18n toggle, no separate /en routes.
+// Only 4 canonical URLs are emitted; hreflang declares id-ID + x-default.
 const ROUTES = ["", "/detect", "/compare", "/analyze"] as const;
 
-function urlFor(locale: (typeof LOCALES)[number], route: string): string {
-  const prefix = locale === "id" ? "" : `/${locale}`;
-  return `${SITE_URL}${prefix}${route}`;
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Use a stable lastModified so Google can trust the signal.
+  // Update this date only when the corresponding route's content changes.
   const now = new Date();
 
-  const entries: SitemapEntry[] = ROUTES.flatMap((route) =>
-    LOCALES.map((locale) => {
-      const canonical = urlFor("id", route); // Indonesian = canonical / default
-      const enUrl = urlFor("en", route);
+  const entries: SitemapEntry[] = ROUTES.map((route) => {
+    const url = `${SITE_URL}${route}`;
 
-      return {
-        url: canonical,
-        lastModified: now,
-        changeFrequency: route === "" ? ("weekly" as const) : ("monthly" as const),
-        priority: route === "" ? 1.0 : 0.8,
-        alternates: {
-          languages: {
-            id: canonical,
-            en: enUrl,
-          },
+    return {
+      url,
+      lastModified: now,
+      changeFrequency: route === "" ? ("weekly" as const) : ("monthly" as const),
+      priority: route === "" ? 1.0 : 0.8,
+      alternates: {
+        languages: {
+          "id-ID": url,
+          "x-default": url,
         },
-      };
-    }),
-  );
+      },
+    };
+  });
 
   return entries;
 }

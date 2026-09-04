@@ -86,9 +86,9 @@ The codebase ships with **first-class internationalization** (Indonesian + Engli
   - 👓 **Eye Status**: Detects open/closed eyes, normal glasses, sunglasses, or occlusions.
 
 ### 4. 🌐 Bilingual Localization (i18n)
-- Full support for **Indonesian (ID)** and **English (EN)** with instant reactivity, persistent storage, and automatic language detection based on the user's browser preferences.
+- Full support for **Indonesian (ID)** and **English (EN)** with instant client-side switching, persistent storage (`localStorage` key `gyf-locale`), and automatic browser-language detection on first visit. Single canonical URL — no separate `/en` routes; hreflang is `id-ID` + `x-default` only to avoid 404 signals.
 - Translations cover UI labels, error messages, marketing sections (About, tool comparison, FAQ), per-tool TL;DR + step-by-step guides, tooltips, and aria attributes.
-- Architecture: type-safe `Dictionary` schema in `lib/i18n/types.ts` with separate `dictionaries/id.ts` and `dictionaries/en.ts`.
+- Architecture: type-safe `Dictionary` schema in `lib/i18n/types.ts` with separate `dictionaries/id.ts` and `dictionaries/en.ts`. Server-rendered SEO (JSON-LD, `llms.txt`, `FAQPage`) stays bilingual via `inLanguage: ["id","en"]` so AI answer engines see both languages without needing duplicate routes.
 
 ### 5. ✂️ Built-in In-Browser Canvas Cropper
 - Users can adjust facial positions, pan/drag, and zoom photos before submitting to the API, ensuring optimal resolution and file size within the 2 MB limit.
@@ -317,7 +317,7 @@ The proxy **pass-throughs client-side navigation** (requests carrying the `Next-
 | Concern | File | Purpose |
 | :--- | :--- | :--- |
 | Crawler policy | [`app/robots.ts`](./app/robots.ts) | Generates `/robots.txt` allowing all major crawlers plus 12 AI bots (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `cohere-ai`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`). |
-| Sitemap | [`app/sitemap.ts`](./app/sitemap.ts) | Emits 8 URLs (4 routes × `id`/`en` locales) with `<xhtml:link rel="alternate" hreflang>` annotations. |
+| Sitemap | [`app/sitemap.ts`](./app/sitemap.ts) | Emits 4 canonical URLs (`/`, `/detect`, `/compare`, `/analyze`) with `id-ID` + `x-default` hreflang — single-URL site, client-side i18n toggle, no `/en` duplicates. |
 | PWA manifest | [`app/manifest.ts`](./app/manifest.ts) | Generates `/manifest.webmanifest` with favicon.ico + 192×192 + 512×512 icons (any + maskable) for mobile install + brand SERP. |
 | Favicon assets | `public/favicon.ico`, `apple-icon.png`, `icon-192.png`, `icon-512.png` | Multi-size icon set generated from `public/icon.png` (canonical 512×512 logo). |
 | Root structured data | [`components/StructuredData.tsx`](./components/StructuredData.tsx) | Renders `Organization` (with `logo` + `image` + `caption` for Knowledge Panel eligibility) + `WebSite` JSON-LD (brand entity, sitelinks searchbox). |

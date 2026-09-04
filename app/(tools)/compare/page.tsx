@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/compare",
     languages: {
-      id: "/compare",
-      en: "/en/compare",
+      "id-ID": "/compare",
+      "x-default": "/compare",
     },
   },
   openGraph: {

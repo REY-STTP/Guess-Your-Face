@@ -22,7 +22,7 @@ const TOOL_CONFIG: Record<ToolConfig["slug"], ToolConfig> = {
     name: "Guess Your Face — Detect",
     description:
       "Multi-face detection with 7 emotional spectra, age, gender, smile, beauty, 3D headpose, and face quality scores. Powered by Face++.",
-    category: "MultimediaApplication",
+    category: "https://schema.org/MultimediaApplication",
     featureList: [
       "Multi-face detection",
       "7 emotional spectra (Anger, Disgust, Fear, Happiness, Neutral, Sadness, Surprise)",
@@ -41,7 +41,7 @@ const TOOL_CONFIG: Record<ToolConfig["slug"], ToolConfig> = {
     name: "Guess Your Face — Compare",
     description:
       "1:1 face verification with confidence score and Face++ false-positive thresholds (1e-3, 1e-4, 1e-5).",
-    category: "MultimediaApplication",
+    category: "https://schema.org/MultimediaApplication",
     featureList: [
       "1:1 face matching",
       "Confidence score visualization",
@@ -56,7 +56,7 @@ const TOOL_CONFIG: Record<ToolConfig["slug"], ToolConfig> = {
     name: "Guess Your Face — Analyze",
     description:
       "Deep attribute inspector for up to 5 face tokens: gender, age, emotion, smile, face quality, beauty, mouth status (mask), eye status (glasses / occlusion).",
-    category: "MultimediaApplication",
+    category: "https://schema.org/MultimediaApplication",
     featureList: [
       "Deep face token analysis",
       "Up to 5 tokens per request",
@@ -73,6 +73,8 @@ export function ToolStructuredData({ slug }: { slug: ToolConfig["slug"] }) {
   const cfg = TOOL_CONFIG[slug];
   const toolUrl = `${SITE_URL}/${cfg.slug}`;
 
+  const ogImageUrl = `${SITE_URL}/og-image.png`;
+
   const softwareApp = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -84,6 +86,8 @@ export function ToolStructuredData({ slug }: { slug: ToolConfig["slug"] }) {
     operatingSystem: "Any (Web-based)",
     inLanguage: ["id", "en"],
     isAccessibleForFree: true,
+    image: ogImageUrl,
+    screenshot: ogImageUrl,
     offers: {
       "@type": "Offer",
       price: "0",
@@ -92,6 +96,7 @@ export function ToolStructuredData({ slug }: { slug: ToolConfig["slug"] }) {
     featureList: cfg.featureList.join(", "),
     publisher: { "@id": `${SITE_URL}#organization` },
     provider: { "@id": `${SITE_URL}#organization` },
+    isPartOf: { "@id": `${SITE_URL}#website` },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": toolUrl,
