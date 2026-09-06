@@ -5,7 +5,7 @@ const SITE_URL: string =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.guess-your-face.web.id";
 
 export const metadata: Metadata = {
-  title: "Syarat — Guess Your Face",
+  title: "Syarat",
   description:
     "Syarat penggunaan Guess Your Face: gratis apa adanya, hasil estimasi AI, penggunaan yang wajar.",
   alternates: {

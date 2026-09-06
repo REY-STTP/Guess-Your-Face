@@ -4,7 +4,7 @@ import { ToolStructuredData } from "@/components/ToolStructuredData";
 import { ToolTldr } from "@/components/ToolTldr";
 
 export const metadata: Metadata = {
-  title: "Analisis Token Wajah — Inspektor Atribut Mendalam (Hingga 5 Token)",
+  title: "Analisis Token Wajah (Hingga 5 Token)",
   description:
     "Inspeksi hingga 5 token wajah: masker, kacamata, emosi, dan atribut mendalam. Tanpa unggah ulang, tanpa menyimpan data.",
   keywords: [

@@ -4,7 +4,7 @@ import { ToolStructuredData } from "@/components/ToolStructuredData";
 import { ToolTldr } from "@/components/ToolTldr";
 
 export const metadata: Metadata = {
-  title: "Bandingkan Wajah — Verifikasi Identitas 1:1 dengan Skor Confidence",
+  title: "Bandingkan Wajah — Verifikasi Identitas 1:1",
   description:
     "Verifikasi dua foto wajah milik orang yang sama (1:1) dengan skor confidence. Gratis, real-time, tanpa menyimpan data.",
   keywords: [
