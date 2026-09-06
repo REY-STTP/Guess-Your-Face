@@ -6,7 +6,7 @@ import { ToolTldr } from "@/components/ToolTldr";
 export const metadata: Metadata = {
   title: "Bandingkan Wajah — Verifikasi Identitas 1:1 dengan Skor Confidence",
   description:
-    "Bandingkan dua foto wajah untuk memverifikasi apakah milik orang yang sama (pencocokan 1:1). Guess Your Face menampilkan skor confidence pencocokan dan menerapkan ambang false-positive Face++ (1e-3, 1e-4, 1e-5).",
+    "Verifikasi dua foto wajah milik orang yang sama (1:1) dengan skor confidence. Gratis, real-time, tanpa menyimpan data.",
   keywords: [
     "perbandingan wajah",
     "pencocokan wajah 1:1",

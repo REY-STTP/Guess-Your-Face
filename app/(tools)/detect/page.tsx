@@ -6,7 +6,7 @@ import { ToolTldr } from "@/components/ToolTldr";
 export const metadata: Metadata = {
   title: "Deteksi Wajah — Emosi, Usia & Atribut Multi-Wajah",
   description:
-    "Unggah foto untuk mendeteksi semua wajah sekaligus. Guess Your Face membaca 7 emosi, usia, gender, senyum, skor beauty, headpose 3D, dan kualitas wajah — berteknologi Face++, real-time dan tanpa menyimpan data.",
+    "Deteksi semua wajah dalam foto sekaligus: 7 emosi, usia, gender, senyum, dan kualitas wajah. Real-time, gratis, tanpa menyimpan data.",
   keywords: [
     "deteksi wajah",
     "deteksi multi-wajah",

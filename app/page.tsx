@@ -6,7 +6,7 @@ import { FaqStructuredData } from "@/components/FaqStructuredData";
 export const metadata: Metadata = {
   title: "Guess Your Face — Baca wajahmu dengan AI real-time",
   description:
-    "Playground analisis wajah AI gratis dan real-time. Deteksi wajah, bandingkan dua potret (pencocokan 1:1), dan periksa token wajah — berteknologi Face++ tanpa menyimpan data. Tanpa login, tanpa daftar.",
+    "Playground analisis wajah AI gratis dan real-time: deteksi wajah, bandingkan dua potret (1:1), dan periksa token wajah. Tanpa menyimpan data.",
   alternates: {
     canonical: "/",
     languages: {

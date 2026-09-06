@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s - Guess Your Face",
   },
   description:
-    "Guess Your Face adalah playground analisis wajah AI gratis dan real-time berteknologi Face++. Deteksi wajah, bandingkan dua potret (1:1), dan periksa token wajah — diproses di memori tanpa menyimpan data.",
+    "Playground analisis wajah AI gratis dan real-time: deteksi wajah, bandingkan dua potret (1:1), dan periksa token wajah. Tanpa menyimpan data.",
   applicationName: "Guess Your Face",
   keywords: [
     "Guess Your Face",

@@ -6,7 +6,7 @@ import { ToolTldr } from "@/components/ToolTldr";
 export const metadata: Metadata = {
   title: "Analisis Token Wajah — Inspektor Atribut Mendalam (Hingga 5 Token)",
   description:
-    "Periksa hingga 5 token wajah untuk atribut mendalam: gender, usia, emosi, senyum, kualitas wajah, beauty, status mulut (deteksi masker), dan status mata (kacamata / oklusi). Pakai ulang token wajah dari Detect tanpa unggah ulang.",
+    "Inspeksi hingga 5 token wajah: masker, kacamata, emosi, dan atribut mendalam. Tanpa unggah ulang, tanpa menyimpan data.",
   keywords: [
     "face token",
     "analisis token wajah",
