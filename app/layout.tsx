@@ -13,9 +13,6 @@ import { StructuredData } from "@/components/StructuredData";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.guess-your-face.web.id";
 
-// Bing Webmaster Tools verification token for the site.
-const BING_SITE_VERIFICATION = "251DD7C241139056B7F36D7E05ABA7E2";
-
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafafa" },
@@ -28,24 +25,25 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Guess Your Face — Read your face with real-time AI",
+    default: "Guess Your Face — Baca wajahmu dengan AI real-time",
     template: "%s - Guess Your Face",
   },
   description:
-    "Guess Your Face is a free, real-time AI facial analysis playground powered by Face++. Detect faces, compare two portraits (1:1), and inspect face tokens — all processed in-memory with zero data retention.",
+    "Guess Your Face adalah playground analisis wajah AI gratis dan real-time berteknologi Face++. Deteksi wajah, bandingkan dua potret (1:1), dan periksa token wajah — diproses di memori tanpa menyimpan data.",
   applicationName: "Guess Your Face",
   keywords: [
     "Guess Your Face",
-    "GYF",
+    "deteksi wajah",
+    "tes emosi wajah",
+    "perbandingan wajah",
+    "face token",
+    "Face++",
+    "analisis wajah AI",
+    "privasi",
+    "tanpa menyimpan data",
     "face detection",
     "facial emotion recognition",
     "face comparison",
-    "1:1 face matching",
-    "face token",
-    "Face++",
-    "AI face analysis",
-    "privacy-first",
-    "zero data retention",
     "Indonesian",
     "English",
   ],
@@ -63,9 +61,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Guess Your Face",
-    title: "Guess Your Face — Read your face with real-time AI",
+    title: "Guess Your Face — Baca wajahmu dengan AI real-time",
     description:
-      "Real-time AI facial detection, 1:1 comparison, and token analysis. Privacy-first, zero data retention.",
+      "Deteksi wajah AI real-time, perbandingan 1:1, dan analisis token. Privasi utama, tanpa menyimpan data.",
     url: "/",
     locale: "id_ID",
     alternateLocale: ["en_US"],
@@ -74,15 +72,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Guess Your Face — Read your face with real-time AI",
+        alt: "Guess Your Face — Baca wajahmu dengan AI real-time",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Guess Your Face — Read your face with real-time AI",
+    title: "Guess Your Face — Baca wajahmu dengan AI real-time",
     description:
-      "Real-time AI facial detection, 1:1 comparison, and token analysis.",
+      "Deteksi wajah AI real-time, perbandingan 1:1, dan analisis token. Privasi utama.",
     images: [
       {
         url: "/og-image.png",
@@ -121,7 +119,7 @@ export const metadata: Metadata = {
     // Google Search Console verification token.
     google: "Y7vUvy3ieL5E3-uUMiCEqb3M_yvHBxMQrytRpNfMOpU",
     other: {
-      "msvalidate.01": BING_SITE_VERIFICATION,
+      "msvalidate.01": "251DD7C241139056B7F36D7E05ABA7E2",
     },
   },
   formatDetection: {
@@ -134,6 +132,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="id" className="h-full antialiased">
+      <head>
+        <link rel="alternate" type="text/plain" title="LLMs" href="/llms.txt" />
+        <link rel="alternate" type="text/plain" title="LLMs (full)" href="/llms-full.txt" />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <LanguageProvider>
           <SiteHeader />

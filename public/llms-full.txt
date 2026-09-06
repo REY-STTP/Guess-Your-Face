@@ -5,7 +5,7 @@
 
 ## About Guess Your Face
 
-Guess Your Face (GYF) is a modern web application built by REY-STTP that uses
+Guess Your Face is a modern web application built by REY-STTP that uses
 the Face++ Cognitive Services API to analyze human faces in photographs. It
 provides three real-time tools — Detect, Compare, and Analyze — wrapped in a
 privacy-first architecture that processes every image in memory and never
@@ -51,7 +51,7 @@ rewritten from scratch on Next.js 16 App Router with React 19 and TypeScript.
 ### Bilingual localization
 - Full Indonesian (ID, default) and English (EN) support.
 - Instant client-side language switch via React Context.
-- Persistent preference stored in `localStorage` under key `gyf-locale`.
+- Persistent preference stored in `localStorage` under key `guess-your-face-locale`.
 - Automatic browser-language detection on first visit.
 
 ### Built-in canvas cropper

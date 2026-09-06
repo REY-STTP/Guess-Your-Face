@@ -10,12 +10,18 @@ const AI_CRAWLERS = [
   "PerplexityBot",
   "ClaudeBot",
   "Claude-Web",
+  "Anthropic-AI",
+  "OAI-SearchBot",
+  "ChatGPT-User",
   "Google-Extended",
+  "GoogleOther",
   "CCBot",
   "Bytespider",
   "Amazonbot",
   "Applebot-Extended",
+  "Applebot",
   "cohere-ai",
+  "DuckAssistBot",
   "Diffbot",
   "FacebookBot",
   "Meta-ExternalAgent",
@@ -36,7 +42,7 @@ export default function robots(): MetadataRoute.Robots {
       })),
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
+    host: new URL(SITE_URL).hostname,
   };
 }
 

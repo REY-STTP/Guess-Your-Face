@@ -48,7 +48,7 @@ export function SiteHeader() {
         >
           <Logo />
           <span className="font-display hidden sm:inline text-base font-bold">Guess Your Face</span>
-          <span className="font-display sm:hidden text-base font-bold">GYF</span>
+          <span className="font-display sm:hidden text-sm font-bold">Guess Your Face</span>
         </Link>
 
         <div className="flex items-center gap-3">

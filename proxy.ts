@@ -60,6 +60,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip Next.js internals and static files served from /public
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|llms.txt|llms-full.txt|icon.png|apple-icon.png|logo.png|.*\\.png$|.*\\.jpg$|.*\\.svg$|.*\\.webp$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|llms.txt|llms-full.txt|icon.png|apple-icon.png|logo.png|.*\\.(?:png|jpe?g|gif|avif|webp|svg|ico|css|js|map|txt|xml|webmanifest|woff2?)$).*)",
   ],
 };

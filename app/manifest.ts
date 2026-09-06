@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Guess Your Face — AI Face Detection & Comparison",
-    short_name: "GYF",
+    short_name: "Guess Your Face",
     description:
       "Real-time AI facial detection, 1:1 face comparison, and face token analysis. Privacy-first, zero data retention. Powered by Face++.",
     start_url: "/",

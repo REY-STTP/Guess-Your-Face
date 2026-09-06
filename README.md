@@ -1,4 +1,4 @@
-# ✨ Guess Your Face (GYF)
+# ✨ Guess Your Face
 
 <div align="center">
 
@@ -52,7 +52,7 @@ The codebase ships with **first-class internationalization** (Indonesian + Engli
 | **Results Visualization** | Raw / simple text responses | **Interactive Bounding Boxes** on faces, *color-coded animated progress bars*, & modern metric cards |
 | **Navigation UX** | Hard page reloads between tools | **Instant soft navigation** with `aria-current`, loading skeletons per route group, and smooth scroll |
 | **Design & UI/UX** | Minimalist view | Premium interface with *modern brutalist/minimalist* aesthetics, adaptive **Dark & Light Theme** support, **WCAG AA compliant contrast ($\ge$ 4.5:1)**, robust typography hierarchy (*Inter Variable, Space Grotesk & JetBrains Mono*), Phosphor icons, and interactive notifications via **Sonner** |
-| **Discoverability** | None (raw HTML) | **Full SEO stack**: JSON-LD (Organization + WebSite + WebApplication + FAQPage + BreadcrumbList), Open Graph, Twitter cards, multilingual sitemap, `robots.txt` whitelisting 12 AI bots, and `llms.txt` for LLM crawlers |
+| **Discoverability** | None (raw HTML) | **Full SEO stack**: JSON-LD (Organization + WebSite + WebApplication + FAQPage + BreadcrumbList), Open Graph, Twitter cards, multilingual sitemap, `robots.txt` whitelisting 19 AI bots, and `llms.txt` for LLM crawlers |
 
 ---
 
@@ -86,7 +86,7 @@ The codebase ships with **first-class internationalization** (Indonesian + Engli
   - 👓 **Eye Status**: Detects open/closed eyes, normal glasses, sunglasses, or occlusions.
 
 ### 4. 🌐 Bilingual Localization (i18n)
-- Full support for **Indonesian (ID)** and **English (EN)** with instant client-side switching, persistent storage (`localStorage` key `gyf-locale`), and automatic browser-language detection on first visit. Single canonical URL — no separate `/en` routes; hreflang is `id-ID` + `x-default` only to avoid 404 signals.
+- Full support for **Indonesian (ID)** and **English (EN)** with instant client-side switching, persistent storage (`localStorage` key `guess-your-face-locale`), and automatic browser-language detection on first visit. Single canonical URL — no separate `/en` routes; hreflang is `id-ID` + `x-default` only to avoid 404 signals.
 - Translations cover UI labels, error messages, marketing sections (About, tool comparison, FAQ), per-tool TL;DR + step-by-step guides, tooltips, and aria attributes.
 - Architecture: type-safe `Dictionary` schema in `lib/i18n/types.ts` with separate `dictionaries/id.ts` and `dictionaries/en.ts`. Server-rendered SEO (JSON-LD, `llms.txt`, `FAQPage`) stays bilingual via `inLanguage: ["id","en"]` so AI answer engines see both languages without needing duplicate routes.
 
@@ -165,8 +165,10 @@ guess-your-face/
 │   ├── not-found.client.tsx           # 404 client component (Localized)
 │   ├── page.tsx                       # Landing page (server entry) — openGraph.siteName + images for /og-image.png
 │   ├── page.client.tsx                # Landing page client wrapper
+│   ├── privacy/                       # /privacy (full ID+EN via dictionaries + WebPage/Breadcrumb JSON-LD)
+│   ├── terms/                         # /terms (full ID+EN via dictionaries + WebPage/Breadcrumb JSON-LD)
 │   ├── robots.ts                      # /robots.txt with AI bot whitelist
-│   └── sitemap.ts                     # Multilingual sitemap (id/en × 4 routes)
+│   └── sitemap.ts                     # Dynamic sitemap (8 URLs: 4 routes + privacy/terms + llms.txt/llms-full.txt, lastmod git → mtime → fallback)
 ├── components/
 │   ├── AnalyzeTool.tsx                # Analyze feature controller (client)
 │   ├── CompareTool.tsx                # Compare feature controller (client)
@@ -174,10 +176,10 @@ guess-your-face/
 │   ├── DetectTool.tsx                 # Detect feature controller (client)
 │   ├── EmotionBars.tsx                # Animated emotion progress bar visualization
 │   ├── FacePreview.tsx                # Image preview with responsive Bounding Boxes
-│   ├── FaqStructuredData.tsx          # Server: FAQPage JSON-LD (English for SEO)
+│   ├── FaqStructuredData.tsx          # Server: dual FAQPage JSON-LD (ID + EN, sourced from dictionaries)
 │   ├── LanguageSwitcher.tsx           # Bilingual ID/EN segmented toggle switch
-│   ├── MarketingSections.tsx          # Landing About + tool cards + FAQ (client, localized)
-│   ├── SiteFooter.tsx                 # Localized privacy & attribution footer
+│   ├── MarketingSections.tsx          # Landing About + tool cards + FAQ (client, localized, mobile accordion)
+│   ├── SiteFooter.tsx                 # Localized disclaimer + Privasi/Syarat links (single sentence)
 │   ├── SiteHeader.tsx                 # Application header with logo & switcher
 │   ├── StructuredData.tsx             # Server: Organization + WebSite JSON-LD
 │   ├── ToolMenu.tsx                   # Feature cards on landing page
@@ -317,12 +319,12 @@ The proxy **pass-throughs client-side navigation** (requests carrying the `Next-
 | Concern | File | Purpose |
 | :--- | :--- | :--- |
 | Crawler policy | [`app/robots.ts`](./app/robots.ts) | Generates `/robots.txt` allowing all major crawlers plus 12 AI bots (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `cohere-ai`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`). |
-| Sitemap | [`app/sitemap.ts`](./app/sitemap.ts) | Emits 4 canonical URLs (`/`, `/detect`, `/compare`, `/analyze`) with `id-ID` + `x-default` hreflang — single-URL site, client-side i18n toggle, no `/en` duplicates. |
+| Sitemap | [`app/sitemap.ts`](./app/sitemap.ts) | Emits 8 canonical URLs (`/`, `/detect`, `/compare`, `/analyze`, `/privacy`, `/terms`, `/llms.txt`, `/llms-full.txt`) with `id-ID` + `x-default` hreflang — single-URL site, client-side i18n toggle, no `/en` duplicates. `lastmod` is content-derived (git commit → mtime → fallback). |
 | PWA manifest | [`app/manifest.ts`](./app/manifest.ts) | Generates `/manifest.webmanifest` with favicon.ico + 192×192 + 512×512 icons (any + maskable) for mobile install + brand SERP. |
 | Favicon assets | `public/favicon.ico`, `apple-icon.png`, `icon-192.png`, `icon-512.png` | Multi-size icon set generated from `public/icon.png` (canonical 512×512 logo). |
 | Root structured data | [`components/StructuredData.tsx`](./components/StructuredData.tsx) | Renders `Organization` (with `logo` + `image` + `caption` for Knowledge Panel eligibility) + `WebSite` JSON-LD (brand entity, sitelinks searchbox). |
 | Per-tool structured data | [`components/ToolStructuredData.tsx`](./components/ToolStructuredData.tsx) | Renders `WebApplication` + `BreadcrumbList` JSON-LD on `/detect`, `/compare`, `/analyze`. |
-| FAQ JSON-LD | [`components/FaqStructuredData.tsx`](./components/FaqStructuredData.tsx) | Renders `FAQPage` JSON-LD on the landing page (English for global SEO crawlers; the visible FAQ is localized via `MarketingSections`). |
+| FAQ JSON-LD | [`components/FaqStructuredData.tsx`](./components/FaqStructuredData.tsx) | Renders dual `FAQPage` JSON-LD (`#faq-id` + `#faq-en`) sourced from the same dictionaries as the visible FAQ, so each block always matches one visible language state. |
 | Open Graph root | `public/og-image.png` | Static 1200×630 OG image served by Next.js file convention; referenced via `metadata.openGraph.images` + `metadata.twitter.images` for predictable URL and CDN caching. |
 | Open Graph per-tool | `app/(tools)/{detect,compare,analyze}/opengraph-image.tsx` | Per-tool branded 1200×630 OG images (dynamic, with hash-suffix routing). |
 | About + FAQ content | [`components/MarketingSections.tsx`](./components/MarketingSections.tsx) | Client component (so it can swap language at runtime): About, 4-stat block, tool comparison cards, and 10 Q&A in the active locale. |
@@ -371,4 +373,4 @@ NEXT_PUBLIC_SITE_URL=https://www.guess-your-face.web.id
 | **SEO** | Brand name appears in SERP (not the Vercel default domain), per-tool titles are unique, sitemap + hreflang consolidate bilingual URLs, multi-size favicons are SERP-eligible. |
 | **GEO** | Generative engines (Google AI Overviews, Perplexity, ChatGPT Search) can quote the FAQ, the About section, and the `llms.txt` definitions verbatim because they are server-rendered HTML. |
 | **AEO** | `FAQPage` schema + 40–60 word answers + comparison table make every URL eligible for featured snippets and voice answers. |
-| **LLMO** | `llms.txt` + `llms-full.txt` give LLM crawlers a structured summary without needing to render the entire JavaScript bundle. The 12-AI-bot whitelist in `robots.ts` explicitly invites them in. |
+| **LLMO** | `llms.txt` + `llms-full.txt` give LLM crawlers a structured summary without needing to render the entire JavaScript bundle. The 19-AI-bot whitelist in `robots.ts` explicitly invites them in. `<link rel="alternate" type="text/plain">` hints are in the root layout `<head>` so crawlers discover both files without guessing URLs. |

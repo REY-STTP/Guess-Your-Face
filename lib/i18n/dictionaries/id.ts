@@ -41,6 +41,7 @@ export const idDictionary: Dictionary = {
   tools: {
     detect: {
       title: "Detect",
+      h1: "Deteksi Wajah & Emosi",
       badge: "Multi-Face & Atribut",
       desc: "Unggah foto, deteksi semua wajah secara serentak, serta analisis spektrum emosi, estimasi usia, gender, dan beauty score.",
       action: "Mulai Deteksi Wajah",
@@ -49,6 +50,7 @@ export const idDictionary: Dictionary = {
     },
     compare: {
       title: "Compare",
+      h1: "Bandingkan Dua Wajah",
       badge: "1:1 Verification",
       desc: "Bandingkan dua foto wajah secara akurat dengan skor confidence dan toleransi threshold Face++.",
       action: "Bandingkan 2 Foto",
@@ -57,6 +59,7 @@ export const idDictionary: Dictionary = {
     },
     analyze: {
       title: "Analyze",
+      h1: "Analisis Token Wajah",
       badge: "Deep Batch",
       desc: "Inspeksi atribut mendalam dari sekumpulan face token yang sudah dideteksi sebelumnya.",
       action: "Inspeksi Face Token",
@@ -314,5 +317,96 @@ export const idDictionary: Dictionary = {
   footer: {
     disclaimer:
       "Guess Your Face - ditenagai Face++. Gambar diproses real-time dan tidak disimpan.",
+    privacy: "Privasi",
+    terms: "Syarat",
+    read: "Baca",
+    and: "dan",
+  },
+  privacy: {
+    back: "← Beranda",
+    updated: "Privasi — diperbarui 7 September 2026",
+    title: "Privasi, tanpa cetak kecil.",
+    sections: [
+      {
+        heading: "Ringkasan singkat",
+        body: [
+          "Foto yang kamu unggah diproses di memori dan langsung dibuang setelah hasil kembali. Tidak ada akun, tidak ada database, tidak ada cookie pelacakan untuk fotomu. Satu-satunya yang tersimpan di browser-mu adalah pilihan bahasa.",
+        ],
+      },
+      {
+        heading: "Cara kerja pemrosesan foto",
+        body: [
+          "Kamu memotong foto di browser (1:1), lalu browser mengirimkannya ke API milik situs ini. Server meneruskannya ke Face++ (region AS, facepp v3) untuk analisis, menampilkan hasilnya kepadamu, dan langsung membuang gambar dari memori. Tidak ada yang ditulis ke disk, server, atau basis data — karena memang tidak ada basis data.",
+          "Face token dari hasil Detect hanya hidup selama sesi dan kedaluwarsa otomatis di sisi Face++.",
+        ],
+      },
+      {
+        heading: "Apa yang tidak kami kumpulkan",
+        body: [
+          "Tidak ada foto yang disimpan. Tidak ada hasil analisis yang disimpan. Tidak ada akun, pendaftaran, atau login — sehingga tidak ada data identitas untuk disimpan. Tidak ada analitik pada fotomu.",
+        ],
+      },
+      {
+        heading: "Pihak ketiga",
+        body: [
+          "Face++ bertindak sebagai subprosesor: gambarmu transit ke server mereka semata-mata untuk analisis dan tunduk pada kebijakan privasi Face++. Repositori kode dan pelaporan masalah berjalan di GitHub dengan kebijakannya sendiri.",
+        ],
+      },
+      {
+        heading: "Penyimpanan lokal di browser-mu",
+        body: [
+          "Satu-satunya yang disimpan situs ini adalah pilihan bahasa (kunci localStorage guess-your-face-locale). Tidak ada cookie pelacakan, tidak ada fingerprinting. Hapus data situs di browser kapan saja untuk menghilangkannya.",
+        ],
+      },
+      {
+        heading: "Kontak",
+        body: [
+          "Pertanyaan privasi atau permintaan terkait data: buka issue di https://github.com/REY-STTP/Guess-Your-Face/issues. Karena tidak ada data pengguna yang disimpan, tidak ada yang perlu diunduh atau dihapus dari sisi kami.",
+        ],
+      },
+    ],
+  },
+  terms: {
+    back: "← Beranda",
+    updated: "Syarat — diperbarui 7 September 2026",
+    title: "Syarat, dibaca dulu.",
+    sections: [
+      {
+        heading: "Ringkasan singkat",
+        body: [
+          "Guess Your Face gratis untuk dipakai apa adanya. Kamu bertanggung jawab atas foto yang kamu unggah dan atas apa yang kamu lakukan dengan hasilnya.",
+        ],
+      },
+      {
+        heading: "Hasil bersifat estimasi",
+        body: [
+          "Emosi, usia, gender, senyum, dan beauty score adalah estimasi model AI, bukan fakta medis atau profesional. Jangan dipakai untuk rekrutmen, penegakan hukum, diagnosis, atau keputusan penting lainnya.",
+        ],
+      },
+      {
+        heading: "Penggunaan yang wajar",
+        body: [
+          "Hanya unggah foto milikmu sendiri atau yang kamu berhak akses. Dilarang memakai tool ini untuk pengawasan (surveillance), identifikasi tanpa izin, atau hal yang melanggar hukum. API bisa gagal atau dibatasi saat kuota habis — itu bagian dari layanan gratis.",
+        ],
+      },
+      {
+        heading: "Layanan apa adanya",
+        body: [
+          "Tidak ada garansi uptime, akurasi, atau ketersediaan. Face++ sebagai pihak ketiga bisa berubah sewaktu-waktu. Kode sumber tersedia MIT di GitHub — silakan audit sebelum percaya.",
+        ],
+      },
+      {
+        heading: "Kekayaan intelektual",
+        body: [
+          "Kode situs ini MIT milik pengembang. Face++ milik pemiliknya masing-masing. Hasil analisis atas fotomu adalah milikmu.",
+        ],
+      },
+      {
+        heading: "Kontak",
+        body: [
+          "Pertanyaan soal syarat: buka issue di https://github.com/REY-STTP/Guess-Your-Face/issues.",
+        ],
+      },
+    ],
   },
 };

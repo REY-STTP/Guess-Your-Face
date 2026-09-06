@@ -10,7 +10,7 @@ export function DetectClient() {
     <div className="animate-rise">
       <div className="mb-8">
         <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-          {t.tools.detect.title}
+          {t.tools.detect.h1}
         </h1>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
           {t.tools.detect.pageDesc}

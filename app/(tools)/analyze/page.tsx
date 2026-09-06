@@ -4,17 +4,17 @@ import { ToolStructuredData } from "@/components/ToolStructuredData";
 import { ToolTldr } from "@/components/ToolTldr";
 
 export const metadata: Metadata = {
-  title: "Analyze Face Tokens — Deep Attribute Inspector (Up to 5 Tokens)",
+  title: "Analisis Token Wajah — Inspektor Atribut Mendalam (Hingga 5 Token)",
   description:
-    "Inspect up to 5 face tokens for deep attributes: gender, age, emotion, smiling, face quality, beauty, mouth status (mask detection), and eye status (glasses / occlusion). Reuse face tokens from Detect without re-uploading.",
+    "Periksa hingga 5 token wajah untuk atribut mendalam: gender, usia, emosi, senyum, kualitas wajah, beauty, status mulut (deteksi masker), dan status mata (kacamata / oklusi). Pakai ulang token wajah dari Detect tanpa unggah ulang.",
   keywords: [
     "face token",
-    "face token analysis",
-    "mask detection",
-    "eye status",
-    "glasses detection",
-    "deep attribute inspector",
-    "Face++ analyze",
+    "analisis token wajah",
+    "deteksi masker",
+    "status mata",
+    "deteksi kacamata",
+    "inspektor atribut",
+    "Face++",
   ],
   alternates: {
     canonical: "/analyze",
@@ -26,16 +26,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Guess Your Face",
-    title: "Analyze — Guess Your Face",
+    title: "Analisis — Guess Your Face",
     description:
-      "Deep inspection for up to 5 face tokens: mask, glasses, emotion, beauty and more.",
+      "Inspeksi mendalam hingga 5 token wajah: masker, kacamata, emosi, beauty, dan lainnya.",
     url: "/analyze",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Analyze — Guess Your Face",
+    title: "Analisis — Guess Your Face",
     description:
-      "Deep inspection for up to 5 face tokens: mask, glasses, emotion, beauty and more.",
+      "Inspeksi mendalam hingga 5 token wajah: masker, kacamata, emosi, beauty, dan lainnya.",
   },
 };
 

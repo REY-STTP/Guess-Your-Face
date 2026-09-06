@@ -4,18 +4,19 @@ import { ToolStructuredData } from "@/components/ToolStructuredData";
 import { ToolTldr } from "@/components/ToolTldr";
 
 export const metadata: Metadata = {
-  title: "Detect Faces — Multi-Face Emotion, Age & Attribute Analysis",
+  title: "Deteksi Wajah — Emosi, Usia & Atribut Multi-Wajah",
   description:
-    "Upload a photo to detect all faces at once. Guess Your Face reads 7 emotions, age, gender, smile intensity, beauty score, 3D headpose, and face quality — powered by Face++, real-time and zero-retention.",
+    "Unggah foto untuk mendeteksi semua wajah sekaligus. Guess Your Face membaca 7 emosi, usia, gender, senyum, skor beauty, headpose 3D, dan kualitas wajah — berteknologi Face++, real-time dan tanpa menyimpan data.",
   keywords: [
-    "face detection",
-    "multi-face detection",
-    "emotion recognition",
-    "age estimation",
-    "gender detection",
-    "beauty score",
+    "deteksi wajah",
+    "deteksi multi-wajah",
+    "pengenalan emosi",
+    "estimasi usia",
+    "deteksi gender",
+    "skor beauty",
     "headpose",
-    "face quality",
+    "kualitas wajah",
+    "face detection",
     "Face++",
   ],
   alternates: {
@@ -28,16 +29,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Guess Your Face",
-    title: "Detect — Guess Your Face",
+    title: "Deteksi — Guess Your Face",
     description:
-      "Upload a photo, detect all faces, and read 7 emotions plus 10+ attributes in real time.",
+      "Unggah foto, deteksi semua wajah, dan baca 7 emosi plus 10+ atribut secara real-time.",
     url: "/detect",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Detect — Guess Your Face",
+    title: "Deteksi — Guess Your Face",
     description:
-      "Upload a photo, detect all faces, and read 7 emotions plus 10+ attributes in real time.",
+      "Unggah foto, deteksi semua wajah, dan baca 7 emosi plus 10+ atribut secara real-time.",
   },
 };
 

@@ -4,17 +4,18 @@ import { ToolStructuredData } from "@/components/ToolStructuredData";
 import { ToolTldr } from "@/components/ToolTldr";
 
 export const metadata: Metadata = {
-  title: "Compare Faces — 1:1 Identity Verification with Confidence Score",
+  title: "Bandingkan Wajah — Verifikasi Identitas 1:1 dengan Skor Confidence",
   description:
-    "Compare two facial photos to verify if they belong to the same person (1:1 matching). Guess Your Face returns a matching confidence score and applies Face++ false-positive thresholds (1e-3, 1e-4, 1e-5).",
+    "Bandingkan dua foto wajah untuk memverifikasi apakah milik orang yang sama (pencocokan 1:1). Guess Your Face menampilkan skor confidence pencocokan dan menerapkan ambang false-positive Face++ (1e-3, 1e-4, 1e-5).",
   keywords: [
+    "perbandingan wajah",
+    "pencocokan wajah 1:1",
+    "verifikasi wajah",
+    "verifikasi identitas",
+    "skor confidence",
+    "ambang false-positive",
     "face comparison",
-    "1:1 face matching",
-    "face verification",
-    "identity verification",
-    "Face++ compare",
-    "confidence score",
-    "false-positive threshold",
+    "Face++",
   ],
   alternates: {
     canonical: "/compare",
@@ -26,16 +27,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Guess Your Face",
-    title: "Compare — Guess Your Face",
+    title: "Bandingkan — Guess Your Face",
     description:
-      "1:1 face matching with confidence score and Face++ thresholds.",
+      "Pencocokan wajah 1:1 dengan skor confidence dan ambang Face++.",
     url: "/compare",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compare — Guess Your Face",
+    title: "Bandingkan — Guess Your Face",
     description:
-      "1:1 face matching with confidence score and Face++ thresholds.",
+      "Pencocokan wajah 1:1 dengan skor confidence dan ambang Face++.",
   },
 };
 

@@ -40,6 +40,7 @@ export type Dictionary = {
   tools: {
     detect: {
       title: string;
+      h1: string;
       badge: string;
       desc: string;
       action: string;
@@ -47,6 +48,7 @@ export type Dictionary = {
     };
     compare: {
       title: string;
+      h1: string;
       badge: string;
       desc: string;
       action: string;
@@ -54,6 +56,7 @@ export type Dictionary = {
     };
     analyze: {
       title: string;
+      h1: string;
       badge: string;
       desc: string;
       action: string;
@@ -219,5 +222,27 @@ export type Dictionary = {
   };
   footer: {
     disclaimer: string;
+    privacy: string;
+    terms: string;
+    read: string;
+    and: string;
+  };
+  privacy: {
+    back: string;
+    updated: string;
+    title: string;
+    sections: {
+      heading: string;
+      body: string[];
+    }[];
+  };
+  terms: {
+    back: string;
+    updated: string;
+    title: string;
+    sections: {
+      heading: string;
+      body: string[];
+    }[];
   };
 };

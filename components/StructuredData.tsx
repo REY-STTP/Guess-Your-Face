@@ -16,7 +16,7 @@ export function StructuredData() {
     "@type": "Organization",
     "@id": `${SITE_URL}#organization`,
     name: "Guess Your Face",
-    alternateName: ["GYF", "GuessYourFace"],
+    alternateName: ["GuessYourFace"],
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",

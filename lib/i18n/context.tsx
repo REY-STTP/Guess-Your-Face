@@ -5,7 +5,7 @@ import type { Dictionary, Locale } from "./types";
 import { idDictionary } from "./dictionaries/id";
 import { enDictionary } from "./dictionaries/en";
 
-const STORAGE_KEY = "gyf-locale";
+const STORAGE_KEY = "guess-your-face-locale";
 
 const DICTIONARIES: Record<Locale, Dictionary> = {
   id: idDictionary,
@@ -24,26 +24,35 @@ const LanguageContext = createContext<LanguageContextType>({
   t: idDictionary,
 });
 
-function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "id";
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (saved === "id" || saved === "en") {
-      return saved;
-    }
-    const browserLang = navigator.language.toLowerCase();
-    return browserLang.startsWith("en") ? "en" : "id";
-  } catch {
-    return "id";
-  }
-}
-
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+  // State awal HARUS "id" agar sama persis dengan SSR (server selalu render
+  // Indonesia). Preferensi tersimpan/browser diterapkan di effect pasca-hydrate
+  // — inilah yang sebelumnya menyebabkan hydration mismatch.
+  const [locale, setLocaleState] = useState<Locale>("id");
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
+
+  useEffect(() => {
+    const resolveLocale = (): Locale | null => {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
+        if (saved === "id" || saved === "en") {
+          return saved === "id" ? null : saved;
+        }
+        return navigator.language.toLowerCase().startsWith("en") ? "en" : null;
+      } catch {
+        return null;
+      }
+    };
+    const next = resolveLocale();
+    if (next) {
+      // Ditunda keluar dari body effect agar selaras dengan aturan lint
+      // (preferensi client diterapkan sekali setelah hydrate).
+      queueMicrotask(() => setLocaleState(next));
+    }
+  }, []);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);

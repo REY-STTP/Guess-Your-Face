@@ -113,7 +113,7 @@ export function MarketingSections() {
               {t.marketing.faqHeading}
             </h2>
 
-            <dl className="mt-6 grid gap-x-8 sm:grid-cols-2">
+            <dl className="mt-6 hidden gap-x-8 sm:grid sm:grid-cols-2">
               {t.faqs.map((faq, i) => (
                 <div
                   key={faq.question}
@@ -134,6 +134,44 @@ export function MarketingSections() {
                 </div>
               ))}
             </dl>
+
+            {/* Mobile: accordion agar tidak terlalu panjang.
+                Atribut name membuat <details> saling eksklusif secara
+                native (tanpa JS); konten tetap di HTML untuk crawler. */}
+            <div className="mt-6 divide-y divide-line/60 border-y border-line/60 sm:hidden">
+              {t.faqs.map((faq, i) => (
+                <details
+                  key={faq.question}
+                  name="guess-faq"
+                  className="group py-4"
+                >
+                  <summary className="flex cursor-pointer list-none items-center gap-3 pr-1 text-left font-medium text-foreground [&::-webkit-details-marker]:hidden">
+                    <span
+                      aria-hidden="true"
+                      className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-accent-soft font-mono text-[10px] font-semibold tabular-nums text-accent"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 text-pretty text-sm">
+                      {faq.question}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-lg leading-none text-accent transition-transform duration-300 ease-out group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div className="faq-answer">
+                    <div>
+                      <p className="mt-3 pl-8 text-sm leading-relaxed text-muted">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
           </section>
         </div>
       </div>

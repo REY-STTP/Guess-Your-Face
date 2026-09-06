@@ -3,7 +3,7 @@
 > Real-time AI facial detection, 1:1 comparison, and face token analysis.
 > Powered by Face++. Privacy-first, zero data retention.
 
-Guess Your Face (GYF) is a free, open-source web application that uses Face++
+Guess Your Face is a free, open-source web application that uses Face++
 Cognitive Services to analyze photos in real time. All uploaded images are
 processed in-memory and never stored. No login, no signup, no analytics on
 user photos.

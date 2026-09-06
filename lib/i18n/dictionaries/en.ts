@@ -41,6 +41,7 @@ export const enDictionary: Dictionary = {
   tools: {
     detect: {
       title: "Detect",
+      h1: "Face & Emotion Detection",
       badge: "Multi-Face & Attributes",
       desc: "Upload a photo to simultaneously detect all faces and read emotional spectra, age estimation, gender, and beauty scores.",
       action: "Start Face Detection",
@@ -49,6 +50,7 @@ export const enDictionary: Dictionary = {
     },
     compare: {
       title: "Compare",
+      h1: "Compare Two Faces",
       badge: "1:1 Verification",
       desc: "Accurately compare two facial photos with confidence score visualization and official Face++ thresholds.",
       action: "Compare 2 Photos",
@@ -57,6 +59,7 @@ export const enDictionary: Dictionary = {
     },
     analyze: {
       title: "Analyze",
+      h1: "Face Token Analysis",
       badge: "Deep Batch",
       desc: "Deeply inspect detailed facial attributes from a batch of registered face tokens without re-uploading.",
       action: "Inspect Face Tokens",
@@ -313,5 +316,96 @@ export const enDictionary: Dictionary = {
   footer: {
     disclaimer:
       "Guess Your Face - powered by Face++. Images are processed in-memory and never stored.",
+    privacy: "Privacy",
+    terms: "Terms",
+    read: "Read our",
+    and: "and",
+  },
+  privacy: {
+    back: "← Home",
+    updated: "Privacy — updated September 7, 2026",
+    title: "Privacy, no fine print.",
+    sections: [
+      {
+        heading: "Short version",
+        body: [
+          "Photos you upload are processed in memory and discarded as soon as results return. No accounts, no database, no tracking cookies for your photos. The only thing stored in your browser is your language choice.",
+        ],
+      },
+      {
+        heading: "How photo processing works",
+        body: [
+          "You crop photos in your browser (1:1), then your browser sends them to this site's API. The server forwards them to Face++ (US region, facepp v3) for analysis, shows you the results, and immediately discards the images from memory. Nothing is written to disk, server, or database — because there is no database.",
+          "Face tokens from Detect results live only for the session and expire automatically on Face++'s side.",
+        ],
+      },
+      {
+        heading: "What we don't collect",
+        body: [
+          "No photos stored. No analysis results stored. No accounts, registration, or login — so there is no identity data to store. No analytics on your photos.",
+        ],
+      },
+      {
+        heading: "Third parties",
+        body: [
+          "Face++ acts as a sub-processor: your images transit to their servers solely for analysis and are subject to Face++'s privacy policy. The code repository and issue reporting run on GitHub under its own policies.",
+        ],
+      },
+      {
+        heading: "Local storage in your browser",
+        body: [
+          "The only thing this site stores is your language choice (localStorage key guess-your-face-locale). No tracking cookies, no fingerprinting. Clear site data in your browser anytime to remove it.",
+        ],
+      },
+      {
+        heading: "Contact",
+        body: [
+          "Privacy questions or data requests: open an issue at https://github.com/REY-STTP/Guess-Your-Face/issues. Since no user data is stored, there is nothing to download or delete on our end.",
+        ],
+      },
+    ],
+  },
+  terms: {
+    back: "← Home",
+    updated: "Terms — updated September 7, 2026",
+    title: "Terms, read first.",
+    sections: [
+      {
+        heading: "Short version",
+        body: [
+          "Guess Your Face is free to use as-is. You are responsible for the photos you upload and what you do with the results.",
+        ],
+      },
+      {
+        heading: "Results are estimates",
+        body: [
+          "Emotion, age, gender, smile, and beauty scores are AI model estimates, not medical or professional facts. Don't use them for hiring, law enforcement, diagnosis, or other important decisions.",
+        ],
+      },
+      {
+        heading: "Fair use",
+        body: [
+          "Only upload photos you own or are authorized to access. Don't use this tool for surveillance, identification without consent, or anything unlawful. The API may fail or be rate-limited when quotas run out — that's part of a free service.",
+        ],
+      },
+      {
+        heading: "Service as-is",
+        body: [
+          "No warranty on uptime, accuracy, or availability. Face++ as a third party may change at any time. The source code is MIT on GitHub — audit before you trust.",
+        ],
+      },
+      {
+        heading: "Intellectual property",
+        body: [
+          "This site's code is MIT by the developer. Face++ belongs to its respective owners. Analysis results of your photos are yours.",
+        ],
+      },
+      {
+        heading: "Contact",
+        body: [
+          "Questions about these terms: open an issue at https://github.com/REY-STTP/Guess-Your-Face/issues.",
+        ],
+      },
+    ],
   },
 };

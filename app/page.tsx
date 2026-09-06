@@ -4,9 +4,9 @@ import { MarketingSections } from "@/components/MarketingSections";
 import { FaqStructuredData } from "@/components/FaqStructuredData";
 
 export const metadata: Metadata = {
-  title: "Guess Your Face — Read your face with real-time AI",
+  title: "Guess Your Face — Baca wajahmu dengan AI real-time",
   description:
-    "Guess Your Face is a free, real-time AI facial analysis playground. Detect faces, compare two portraits (1:1 matching), and inspect face tokens — powered by Face++ with zero data retention. No login, no signup.",
+    "Playground analisis wajah AI gratis dan real-time. Deteksi wajah, bandingkan dua potret (pencocokan 1:1), dan periksa token wajah — berteknologi Face++ tanpa menyimpan data. Tanpa login, tanpa daftar.",
   alternates: {
     canonical: "/",
     languages: {
@@ -17,16 +17,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Guess Your Face",
-    title: "Guess Your Face — Read your face with real-time AI",
+    title: "Guess Your Face — Baca wajahmu dengan AI real-time",
     description:
-      "Free real-time AI face detection, comparison, and token analysis. Privacy-first.",
+      "Deteksi wajah, perbandingan, dan analisis token AI gratis dan real-time. Privasi utama.",
     url: "/",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Guess Your Face — Read your face with real-time AI",
+        alt: "Guess Your Face — Baca wajahmu dengan AI real-time",
       },
     ],
   },

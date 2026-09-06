@@ -10,7 +10,7 @@ export function AnalyzeClient() {
     <div className="animate-rise">
       <div className="mb-8">
         <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-          {t.tools.analyze.title}
+          {t.tools.analyze.h1}
         </h1>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted">
           {t.tools.analyze.pageDesc}
